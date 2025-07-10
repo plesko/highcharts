@@ -288,10 +288,6 @@
   
       <!-- Chart 1: Performance by Category -->
     <div class="chart-container">
-      <div class="chart-title">Performance by Category</div>
-      <div class="chart-description">
-        Shows the percentage of successful responses (true values) for each category (Conditions, Instruction, Support).
-      </div>
     <div id="categoryChart" class="chart-wrapper"></div>
     <div class="export-controls">
       <button class="export-btn" onclick="exportChart('categoryChart', 'png')">Export PNG</button>
@@ -302,10 +298,6 @@
   
   <!-- Chart 2: Performance by Guiding Question -->
   <div class="chart-container">
-    <div class="chart-title">Performance by Guiding Question</div>
-    <div class="chart-description">
-      Displays the success rate for each guiding question across all schools.
-    </div>
     <div id="guidingQuestionChart" class="chart-wrapper"></div>
     <div class="export-controls">
       <button class="export-btn" onclick="exportChart('guidingQuestionChart', 'png')">Export PNG</button>
@@ -316,10 +308,6 @@
   
   <!-- Chart 3: School Performance Comparison -->
   <div class="chart-container">
-    <div class="chart-title">School Performance Comparison</div>
-    <div class="chart-description">
-      Compares the overall performance of each school across all indicators.
-    </div>
     <div id="schoolChart" class="chart-wrapper"></div>
     <div class="export-controls">
       <button class="export-btn" onclick="exportChart('schoolChart', 'png')">Export PNG</button>
@@ -330,10 +318,6 @@
   
   <!-- Chart 4: Individual Indicator Performance -->
   <div class="chart-container">
-    <div class="chart-title">Individual Indicator Performance</div>
-    <div class="chart-description">
-      Shows the success rate for each individual indicator across all schools.
-    </div>
     <div id="indicatorChart" class="chart-wrapper"></div>
     <div class="export-controls">
       <button class="export-btn" onclick="exportChart('indicatorChart', 'png')">Export PNG</button>
@@ -480,7 +464,14 @@
       console.log('Final chart data:', data);
       Highcharts.chart('categoryChart', {
         chart: { type: 'column' },
-        title: { text: null },
+        title: { 
+          text: 'Performance by Category',
+          style: { fontSize: '18px', fontWeight: 'bold' }
+        },
+        subtitle: { 
+          text: 'Shows the percentage of successful responses (true values) for each category (Conditions, Instruction, Support).',
+          style: { fontSize: '14px' }
+        },
         xAxis: { 
           type: 'category',
           labels: {
@@ -491,11 +482,22 @@
           }
         },
         yAxis: { title: { text: 'Success Rate (%)' }, max: 100 },
-        legend: { enabled: true },
+        legend: { enabled: false },
         tooltip: { formatter: function() { return `<b>${this.point.name}</b><br/>Success Rate: <b>${this.point.y}%</b>`; } },
         plotOptions: { column: { colorByPoint: false } },
         series: [{ name: 'Success Rate', data }],
-        exporting: { enabled: false }
+        exporting: { 
+          enabled: true,
+          buttons: {
+            contextButton: {
+              menuItems: ['downloadPNG', 'downloadJPEG', 'downloadPDF', 'downloadSVG', 'downloadCSV', 'downloadXLS'],
+              x: -10,
+              y: 10,
+              align: 'right',
+              verticalAlign: 'top'
+            }
+          }
+        }
       });
     }
     
@@ -556,10 +558,17 @@
       
       Highcharts.chart('guidingQuestionChart', {
         chart: { type: 'column' },
-        title: { text: null },
+        title: { 
+          text: 'Performance by Guiding Question',
+          style: { fontSize: '18px', fontWeight: 'bold' }
+        },
+        subtitle: { 
+          text: 'Displays the success rate for each guiding question across all schools.',
+          style: { fontSize: '14px' }
+        },
         xAxis: { type: 'category' },
         yAxis: { title: { text: 'Success Rate (%)' }, max: 100 },
-        legend: { enabled: true },
+        legend: { enabled: false },
         tooltip: { 
           formatter: function() { 
             return `<b>${this.point.name}</b><br/>Category: ${this.point.custom?.category || 'Unknown'}<br/>Success Rate: <b>${this.point.y}%</b>`; 
@@ -567,7 +576,18 @@
         },
         plotOptions: { column: { colorByPoint: false } },
         series: [{ name: 'Success Rate', data: gqData }],
-        exporting: { enabled: false }
+        exporting: { 
+          enabled: true,
+          buttons: {
+            contextButton: {
+              menuItems: ['downloadPNG', 'downloadJPEG', 'downloadPDF', 'downloadSVG', 'downloadCSV', 'downloadXLS'],
+              x: -10,
+              y: 10,
+              align: 'right',
+              verticalAlign: 'top'
+            }
+          }
+        }
       });
     }
     
@@ -590,7 +610,14 @@
       
       Highcharts.chart('schoolChart', {
         chart: { type: 'column' },
-        title: { text: null },
+        title: { 
+          text: 'School Performance Comparison',
+          style: { fontSize: '18px', fontWeight: 'bold' }
+        },
+        subtitle: { 
+          text: 'Compares the overall performance of each school across all indicators.',
+          style: { fontSize: '14px' }
+        },
         xAxis: { type: 'category' },
         yAxis: { title: { text: 'Success Rate (%)' }, max: 100 },
         legend: { enabled: false },
@@ -611,7 +638,18 @@
           }
         },
         series: [{ name: 'Success Rate', data: schoolData }],
-        exporting: { enabled: false }
+        exporting: { 
+          enabled: true,
+          buttons: {
+            contextButton: {
+              menuItems: ['downloadPNG', 'downloadJPEG', 'downloadPDF', 'downloadSVG', 'downloadCSV', 'downloadXLS'],
+              x: -10,
+              y: 10,
+              align: 'right',
+              verticalAlign: 'top'
+            }
+          }
+        }
       });
     }
     
@@ -689,10 +727,17 @@
       
       Highcharts.chart('indicatorChart', {
         chart: { type: 'column' },
-        title: { text: null },
+        title: { 
+          text: 'Individual Indicator Performance',
+          style: { fontSize: '18px', fontWeight: 'bold' }
+        },
+        subtitle: { 
+          text: 'Shows the success rate for each individual indicator across all schools.',
+          style: { fontSize: '14px' }
+        },
         xAxis: { type: 'category' },
         yAxis: { title: { text: 'Success Rate (%)' }, max: 100 },
-        legend: { enabled: true },
+        legend: { enabled: false },
         tooltip: { 
           formatter: function() { 
             return `<b>${this.point.name}</b><br/>Category: ${this.point.custom?.category || 'Unknown'}<br/>Guiding Question: ${this.point.custom?.guidingQuestion || 'Unknown'}<br/>Success Rate: <b>${this.point.y}%</b>`; 
@@ -700,7 +745,18 @@
         },
         plotOptions: { column: { colorByPoint: false } },
         series: [{ name: 'Success Rate', data: indicatorData }],
-        exporting: { enabled: false }
+        exporting: { 
+          enabled: true,
+          buttons: {
+            contextButton: {
+              menuItems: ['downloadPNG', 'downloadJPEG', 'downloadPDF', 'downloadSVG', 'downloadCSV', 'downloadXLS'],
+              x: -10,
+              y: 10,
+              align: 'right',
+              verticalAlign: 'top'
+            }
+          }
+        }
       });
     }
     
