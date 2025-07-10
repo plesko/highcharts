@@ -1,0 +1,1842 @@
+{
+  "Academy Elementary": {
+    "Conditions": {
+      "GQ 1: Are we placing the strongest teachers with the highest-needs students?": [
+        {
+          "Key Indicator": "Placement and hiring decisions are informed by campus-level student need and teacher effectiveness data",
+          "Value": true
+        },
+        {
+          "Key Indicator": "New teachers (<2 years) receive induction and mentorship from high-performing educators, identified through appraisal data, to support their professional growth and classroom success",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Average years of teacher experience greater than 3 years",
+          "Value": false
+        },
+        {
+          "Key Indicator": "Certified vs non certified ratio greater than 75% in core content areas",
+          "Value": true
+        },
+        {
+          "Key Indicator": "75%+ of teachers are rated proficient or above on T-TESS (or other district system)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "75%+ of eligible teachers earning a designation on TIA (or other district system)",
+          "Value": true
+        }
+      ],
+      "GQ 2: Are we creating the conditions for student learning?": [
+        {
+          "Key Indicator": "Written behavior expectations with clear expectations for classroom and common areas",
+          "Value": true
+        },
+        {
+          "Key Indicator": "100% of staff trained on and understand campus behavior expectations",
+          "Value": false
+        },
+        {
+          "Key Indicator": "90% of classrooms observed demonstrating clear behavioral expectations, routines, and procedures",
+          "Value": true
+        },
+        {
+          "Key Indicator": "90% of students observed following school-wide expectations in common areas",
+          "Value": false
+        },
+        {
+          "Key Indicator": "90% of teachers observed (communicating, modeling, and reinforcing behavioral expectations",
+          "Value": true
+        }
+      ]
+    },
+    "Instruction": {
+      "GQ 3: Are the instructional materials high-quality?": [
+        {
+          "Key Indicator": "Materials utilized in the curriculum identified in the Certification of Provision of Instructional Materials Survey 2025-2026",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Lever 4 Local Classroom Review Report",
+          "Value": false
+        }
+      ],
+      "GQ 4: Are research-based instructional strategies being implemented?": [
+        {
+          "Key Indicator": "District/Campus has an Instructional Framework for RLA",
+          "Value": true
+        },
+        {
+          "Key Indicator": "District/Campus has an Instructional Framework for Math",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of RLA Foundational Skills RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of RLA Text Complexity RBIS Observed",
+          "Value": false
+        },
+        {
+          "Key Indicator": "% of RLA Knowledge Coherence RBIS Observed",
+          "Value": false
+        },
+        {
+          "Key Indicator": "% of RLA Text Based Responses RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of Math Balanced Conceptual and Procedural RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of Math Depth of Key Concepts RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of Math Coherence of Key Concepts RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of Math Productive Struggle RBIS Observed",
+          "Value": false
+        },
+        {
+          "Key Indicator": "Instructional leaders provide Internalization Tools/Protocols for planning (4.1.3)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "PLC observed instructional leaders and teachers engaged in internalization process (4.1.3)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Instructional leaders have a process for Lesson Review and Feedback (4.1.4)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Evidence of lesson review and feedback consistent for all teachers (4.1.4)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Special populations teachers participant in internalization and planning meetings",
+          "Value": true
+        }
+      ]
+    },
+    "Support": {
+      "GQ 5: Are we building teacher capacity through observation and feedback cycles?": [
+        {
+          "Key Indicator": "100% of teachers have campus leader assigned for observation and coaching",
+          "Value": true
+        },
+        {
+          "Key Indicator": "IL have walkthrough/ observation schedules that include all teachers",
+          "Value": true
+        },
+        {
+          "Key Indicator": "IL use consistent Observation/Coaching Walk Through Tool",
+          "Value": false
+        },
+        {
+          "Key Indicator": "IL use consistent Observation/Coaching Tracker",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Teacher action steps based on observation data include both behavior management and instructional focus",
+          "Value": true
+        },
+        {
+          "Key Indicator": "85%+ of teachers report that feedback helps them grow instructionally",
+          "Value": false
+        },
+        {
+          "Key Indicator": "75%+ of teachers show growth in instructional practice across the semester/year",
+          "Value": true
+        }
+      ],
+      "GQ 6: Are we using data to effectively analyze and monitor student performance?": [
+        {
+          "Key Indicator": "Campus has a data meeting schedule to analyze assessment data",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Frequency of data meetings is relevant to assessment periods",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Special Populations teachers attend and engage in data meetings",
+          "Value": false
+        },
+        {
+          "Key Indicator": "IL use consistent data analysis protocols or agenda with steps for analyzing student performance",
+          "Value": false
+        },
+        {
+          "Key Indicator": "Evidence of instructional adjustments based on student data",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Campus leaders give feedback on instructional adjustments based on student data",
+          "Value": true
+        }
+      ]
+    }
+  },
+  "Acme Elementary": {
+    "Conditions": {
+      "GQ 1: Are we placing the strongest teachers with the highest-needs students?": [
+        {
+          "Key Indicator": "Placement and hiring decisions are informed by campus-level student need and teacher effectiveness data",
+          "Value": true
+        },
+        {
+          "Key Indicator": "New teachers (<2 years) receive induction and mentorship from high-performing educators, identified through appraisal data, to support their professional growth and classroom success",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Average years of teacher experience greater than 3 years",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Certified vs non certified ratio greater than 75% in core content areas",
+          "Value": false
+        },
+        {
+          "Key Indicator": "75%+ of teachers are rated proficient or above on T-TESS (or other district system)",
+          "Value": false
+        },
+        {
+          "Key Indicator": "75%+ of eligible teachers earning a designation on TIA (or other district system)",
+          "Value": true
+        }
+      ],
+      "GQ 2: Are we creating the conditions for student learning?": [
+        {
+          "Key Indicator": "Written behavior expectations with clear expectations for classroom and common areas",
+          "Value": false
+        },
+        {
+          "Key Indicator": "100% of staff trained on and understand campus behavior expectations",
+          "Value": true
+        },
+        {
+          "Key Indicator": "90% of classrooms observed demonstrating clear behavioral expectations, routines, and procedures",
+          "Value": true
+        },
+        {
+          "Key Indicator": "90% of students observed following school-wide expectations in common areas",
+          "Value": true
+        },
+        {
+          "Key Indicator": "90% of teachers observed (communicating, modeling, and reinforcing behavioral expectations",
+          "Value": true
+        }
+      ]
+    },
+    "Instruction": {
+      "GQ 3: Are the instructional materials high-quality?": [
+        {
+          "Key Indicator": "Materials utilized in the curriculum identified in the Certification of Provision of Instructional Materials Survey 2025-2026",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Lever 4 Local Classroom Review Report",
+          "Value": true
+        }
+      ],
+      "GQ 4: Are research-based instructional strategies being implemented?": [
+        {
+          "Key Indicator": "District/Campus has an Instructional Framework for RLA",
+          "Value": false
+        },
+        {
+          "Key Indicator": "District/Campus has an Instructional Framework for Math",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of RLA Foundational Skills RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of RLA Text Complexity RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of RLA Knowledge Coherence RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of RLA Text Based Responses RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of Math Balanced Conceptual and Procedural RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of Math Depth of Key Concepts RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of Math Coherence of Key Concepts RBIS Observed",
+          "Value": false
+        },
+        {
+          "Key Indicator": "% of Math Productive Struggle RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Instructional leaders provide Internalization Tools/Protocols for planning (4.1.3)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "PLC observed instructional leaders and teachers engaged in internalization process (4.1.3)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Instructional leaders have a process for Lesson Review and Feedback (4.1.4)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Evidence of lesson review and feedback consistent for all teachers (4.1.4)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Special populations teachers participant in internalization and planning meetings",
+          "Value": false
+        }
+      ]
+    },
+    "Support": {
+      "GQ 5: Are we building teacher capacity through observation and feedback cycles?": [
+        {
+          "Key Indicator": "100% of teachers have campus leader assigned for observation and coaching",
+          "Value": true
+        },
+        {
+          "Key Indicator": "IL have walkthrough/ observation schedules that include all teachers",
+          "Value": false
+        },
+        {
+          "Key Indicator": "IL use consistent Observation/Coaching Walk Through Tool",
+          "Value": true
+        },
+        {
+          "Key Indicator": "IL use consistent Observation/Coaching Tracker",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Teacher action steps based on observation data include both behavior management and instructional focus",
+          "Value": true
+        },
+        {
+          "Key Indicator": "85%+ of teachers report that feedback helps them grow instructionally",
+          "Value": true
+        },
+        {
+          "Key Indicator": "75%+ of teachers show growth in instructional practice across the semester/year",
+          "Value": true
+        }
+      ],
+      "GQ 6: Are we using data to effectively analyze and monitor student performance?": [
+        {
+          "Key Indicator": "Campus has a data meeting schedule to analyze assessment data",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Frequency of data meetings is relevant to assessment periods",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Special Populations teachers attend and engage in data meetings",
+          "Value": true
+        },
+        {
+          "Key Indicator": "IL use consistent data analysis protocols or agenda with steps for analyzing student performance",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Evidence of instructional adjustments based on student data",
+          "Value": false
+        },
+        {
+          "Key Indicator": "Campus leaders give feedback on instructional adjustments based on student data",
+          "Value": true
+        }
+      ]
+    }
+  },
+  "Hills Elementary": {
+    "Conditions": {
+      "GQ 1: Are we placing the strongest teachers with the highest-needs students?": [
+        {
+          "Key Indicator": "Placement and hiring decisions are informed by campus-level student need and teacher effectiveness data",
+          "Value": true
+        },
+        {
+          "Key Indicator": "New teachers (<2 years) receive induction and mentorship from high-performing educators, identified through appraisal data, to support their professional growth and classroom success",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Average years of teacher experience greater than 3 years",
+          "Value": false
+        },
+        {
+          "Key Indicator": "Certified vs non certified ratio greater than 75% in core content areas",
+          "Value": false
+        },
+        {
+          "Key Indicator": "75%+ of teachers are rated proficient or above on T-TESS (or other district system)",
+          "Value": false
+        },
+        {
+          "Key Indicator": "75%+ of eligible teachers earning a designation on TIA (or other district system)",
+          "Value": false
+        }
+      ],
+      "GQ 2: Are we creating the conditions for student learning?": [
+        {
+          "Key Indicator": "Written behavior expectations with clear expectations for classroom and common areas",
+          "Value": false
+        },
+        {
+          "Key Indicator": "100% of staff trained on and understand campus behavior expectations",
+          "Value": false
+        },
+        {
+          "Key Indicator": "90% of classrooms observed demonstrating clear behavioral expectations, routines, and procedures",
+          "Value": true
+        },
+        {
+          "Key Indicator": "90% of students observed following school-wide expectations in common areas",
+          "Value": false
+        },
+        {
+          "Key Indicator": "90% of teachers observed (communicating, modeling, and reinforcing behavioral expectations",
+          "Value": true
+        }
+      ]
+    },
+    "Instruction": {
+      "GQ 3: Are the instructional materials high-quality?": [
+        {
+          "Key Indicator": "Materials utilized in the curriculum identified in the Certification of Provision of Instructional Materials Survey 2025-2026",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Lever 4 Local Classroom Review Report",
+          "Value": false
+        }
+      ],
+      "GQ 4: Are research-based instructional strategies being implemented?": [
+        {
+          "Key Indicator": "District/Campus has an Instructional Framework for RLA",
+          "Value": true
+        },
+        {
+          "Key Indicator": "District/Campus has an Instructional Framework for Math",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of RLA Foundational Skills RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of RLA Text Complexity RBIS Observed",
+          "Value": false
+        },
+        {
+          "Key Indicator": "% of RLA Knowledge Coherence RBIS Observed",
+          "Value": false
+        },
+        {
+          "Key Indicator": "% of RLA Text Based Responses RBIS Observed",
+          "Value": false
+        },
+        {
+          "Key Indicator": "% of Math Balanced Conceptual and Procedural RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of Math Depth of Key Concepts RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of Math Coherence of Key Concepts RBIS Observed",
+          "Value": false
+        },
+        {
+          "Key Indicator": "% of Math Productive Struggle RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Instructional leaders provide Internalization Tools/Protocols for planning (4.1.3)",
+          "Value": false
+        },
+        {
+          "Key Indicator": "PLC observed instructional leaders and teachers engaged in internalization process (4.1.3)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Instructional leaders have a process for Lesson Review and Feedback (4.1.4)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Evidence of lesson review and feedback consistent for all teachers (4.1.4)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Special populations teachers participant in internalization and planning meetings",
+          "Value": false
+        }
+      ]
+    },
+    "Support": {
+      "GQ 5: Are we building teacher capacity through observation and feedback cycles?": [
+        {
+          "Key Indicator": "100% of teachers have campus leader assigned for observation and coaching",
+          "Value": false
+        },
+        {
+          "Key Indicator": "IL have walkthrough/ observation schedules that include all teachers",
+          "Value": false
+        },
+        {
+          "Key Indicator": "IL use consistent Observation/Coaching Walk Through Tool",
+          "Value": false
+        },
+        {
+          "Key Indicator": "IL use consistent Observation/Coaching Tracker",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Teacher action steps based on observation data include both behavior management and instructional focus",
+          "Value": true
+        },
+        {
+          "Key Indicator": "85%+ of teachers report that feedback helps them grow instructionally",
+          "Value": true
+        },
+        {
+          "Key Indicator": "75%+ of teachers show growth in instructional practice across the semester/year",
+          "Value": true
+        }
+      ],
+      "GQ 6: Are we using data to effectively analyze and monitor student performance?": [
+        {
+          "Key Indicator": "Campus has a data meeting schedule to analyze assessment data",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Frequency of data meetings is relevant to assessment periods",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Special Populations teachers attend and engage in data meetings",
+          "Value": true
+        },
+        {
+          "Key Indicator": "IL use consistent data analysis protocols or agenda with steps for analyzing student performance",
+          "Value": false
+        },
+        {
+          "Key Indicator": "Evidence of instructional adjustments based on student data",
+          "Value": false
+        },
+        {
+          "Key Indicator": "Campus leaders give feedback on instructional adjustments based on student data",
+          "Value": false
+        }
+      ]
+    }
+  },
+  "Rose Elementary": {
+    "Conditions": {
+      "GQ 1: Are we placing the strongest teachers with the highest-needs students?": [
+        {
+          "Key Indicator": "Placement and hiring decisions are informed by campus-level student need and teacher effectiveness data",
+          "Value": true
+        },
+        {
+          "Key Indicator": "New teachers (<2 years) receive induction and mentorship from high-performing educators, identified through appraisal data, to support their professional growth and classroom success",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Average years of teacher experience greater than 3 years",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Certified vs non certified ratio greater than 75% in core content areas",
+          "Value": true
+        },
+        {
+          "Key Indicator": "75%+ of teachers are rated proficient or above on T-TESS (or other district system)",
+          "Value": false
+        },
+        {
+          "Key Indicator": "75%+ of eligible teachers earning a designation on TIA (or other district system)",
+          "Value": false
+        }
+      ],
+      "GQ 2: Are we creating the conditions for student learning?": [
+        {
+          "Key Indicator": "Written behavior expectations with clear expectations for classroom and common areas",
+          "Value": true
+        },
+        {
+          "Key Indicator": "100% of staff trained on and understand campus behavior expectations",
+          "Value": true
+        },
+        {
+          "Key Indicator": "90% of classrooms observed demonstrating clear behavioral expectations, routines, and procedures",
+          "Value": true
+        },
+        {
+          "Key Indicator": "90% of students observed following school-wide expectations in common areas",
+          "Value": true
+        },
+        {
+          "Key Indicator": "90% of teachers observed (communicating, modeling, and reinforcing behavioral expectations",
+          "Value": false
+        }
+      ]
+    },
+    "Instruction": {
+      "GQ 3: Are the instructional materials high-quality?": [
+        {
+          "Key Indicator": "Materials utilized in the curriculum identified in the Certification of Provision of Instructional Materials Survey 2025-2026",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Lever 4 Local Classroom Review Report",
+          "Value": false
+        }
+      ],
+      "GQ 4: Are research-based instructional strategies being implemented?": [
+        {
+          "Key Indicator": "District/Campus has an Instructional Framework for RLA",
+          "Value": true
+        },
+        {
+          "Key Indicator": "District/Campus has an Instructional Framework for Math",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of RLA Foundational Skills RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of RLA Text Complexity RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of RLA Knowledge Coherence RBIS Observed",
+          "Value": false
+        },
+        {
+          "Key Indicator": "% of RLA Text Based Responses RBIS Observed",
+          "Value": false
+        },
+        {
+          "Key Indicator": "% of Math Balanced Conceptual and Procedural RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of Math Depth of Key Concepts RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of Math Coherence of Key Concepts RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of Math Productive Struggle RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Instructional leaders provide Internalization Tools/Protocols for planning (4.1.3)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "PLC observed instructional leaders and teachers engaged in internalization process (4.1.3)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Instructional leaders have a process for Lesson Review and Feedback (4.1.4)",
+          "Value": false
+        },
+        {
+          "Key Indicator": "Evidence of lesson review and feedback consistent for all teachers (4.1.4)",
+          "Value": false
+        },
+        {
+          "Key Indicator": "Special populations teachers participant in internalization and planning meetings",
+          "Value": false
+        }
+      ]
+    },
+    "Support": {
+      "GQ 5: Are we building teacher capacity through observation and feedback cycles?": [
+        {
+          "Key Indicator": "100% of teachers have campus leader assigned for observation and coaching",
+          "Value": true
+        },
+        {
+          "Key Indicator": "IL have walkthrough/ observation schedules that include all teachers",
+          "Value": true
+        },
+        {
+          "Key Indicator": "IL use consistent Observation/Coaching Walk Through Tool",
+          "Value": true
+        },
+        {
+          "Key Indicator": "IL use consistent Observation/Coaching Tracker",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Teacher action steps based on observation data include both behavior management and instructional focus",
+          "Value": true
+        },
+        {
+          "Key Indicator": "85%+ of teachers report that feedback helps them grow instructionally",
+          "Value": false
+        },
+        {
+          "Key Indicator": "75%+ of teachers show growth in instructional practice across the semester/year",
+          "Value": false
+        }
+      ],
+      "GQ 6: Are we using data to effectively analyze and monitor student performance?": [
+        {
+          "Key Indicator": "Campus has a data meeting schedule to analyze assessment data",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Frequency of data meetings is relevant to assessment periods",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Special Populations teachers attend and engage in data meetings",
+          "Value": true
+        },
+        {
+          "Key Indicator": "IL use consistent data analysis protocols or agenda with steps for analyzing student performance",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Evidence of instructional adjustments based on student data",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Campus leaders give feedback on instructional adjustments based on student data",
+          "Value": false
+        }
+      ]
+    }
+  },
+  "Acme Middle School": {
+    "Conditions": {
+      "GQ 1: Are we placing the strongest teachers with the highest-needs students?": [
+        {
+          "Key Indicator": "Placement and hiring decisions are informed by campus-level student need and teacher effectiveness data",
+          "Value": true
+        },
+        {
+          "Key Indicator": "New teachers (<2 years) receive induction and mentorship from high-performing educators, identified through appraisal data, to support their professional growth and classroom success",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Average years of teacher experience greater than 3 years",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Certified vs non certified ratio greater than 75% in core content areas",
+          "Value": true
+        },
+        {
+          "Key Indicator": "75%+ of teachers are rated proficient or above on T-TESS (or other district system)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "75%+ of eligible teachers earning a designation on TIA (or other district system)",
+          "Value": false
+        }
+      ],
+      "GQ 2: Are we creating the conditions for student learning?": [
+        {
+          "Key Indicator": "Written behavior expectations with clear expectations for classroom and common areas",
+          "Value": true
+        },
+        {
+          "Key Indicator": "100% of staff trained on and understand campus behavior expectations",
+          "Value": true
+        },
+        {
+          "Key Indicator": "90% of classrooms observed demonstrating clear behavioral expectations, routines, and procedures",
+          "Value": true
+        },
+        {
+          "Key Indicator": "90% of students observed following school-wide expectations in common areas",
+          "Value": false
+        },
+        {
+          "Key Indicator": "90% of teachers observed (communicating, modeling, and reinforcing behavioral expectations",
+          "Value": false
+        }
+      ]
+    },
+    "Instruction": {
+      "GQ 3: Are the instructional materials high-quality?": [
+        {
+          "Key Indicator": "Materials utilized in the curriculum identified in the Certification of Provision of Instructional Materials Survey 2025-2026",
+          "Value": false
+        },
+        {
+          "Key Indicator": "Lever 4 Local Classroom Review Report",
+          "Value": false
+        }
+      ],
+      "GQ 4: Are research-based instructional strategies being implemented?": [
+        {
+          "Key Indicator": "District/Campus has an Instructional Framework for RLA",
+          "Value": true
+        },
+        {
+          "Key Indicator": "District/Campus has an Instructional Framework for Math",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of RLA Foundational Skills RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of RLA Text Complexity RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of RLA Knowledge Coherence RBIS Observed",
+          "Value": false
+        },
+        {
+          "Key Indicator": "% of RLA Text Based Responses RBIS Observed",
+          "Value": false
+        },
+        {
+          "Key Indicator": "% of Math Balanced Conceptual and Procedural RBIS Observed",
+          "Value": false
+        },
+        {
+          "Key Indicator": "% of Math Depth of Key Concepts RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of Math Coherence of Key Concepts RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of Math Productive Struggle RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Instructional leaders provide Internalization Tools/Protocols for planning (4.1.3)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "PLC observed instructional leaders and teachers engaged in internalization process (4.1.3)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Instructional leaders have a process for Lesson Review and Feedback (4.1.4)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Evidence of lesson review and feedback consistent for all teachers (4.1.4)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Special populations teachers participant in internalization and planning meetings",
+          "Value": false
+        }
+      ]
+    },
+    "Support": {
+      "GQ 5: Are we building teacher capacity through observation and feedback cycles?": [
+        {
+          "Key Indicator": "100% of teachers have campus leader assigned for observation and coaching",
+          "Value": true
+        },
+        {
+          "Key Indicator": "IL have walkthrough/ observation schedules that include all teachers",
+          "Value": true
+        },
+        {
+          "Key Indicator": "IL use consistent Observation/Coaching Walk Through Tool",
+          "Value": false
+        },
+        {
+          "Key Indicator": "IL use consistent Observation/Coaching Tracker",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Teacher action steps based on observation data include both behavior management and instructional focus",
+          "Value": false
+        },
+        {
+          "Key Indicator": "85%+ of teachers report that feedback helps them grow instructionally",
+          "Value": true
+        },
+        {
+          "Key Indicator": "75%+ of teachers show growth in instructional practice across the semester/year",
+          "Value": true
+        }
+      ],
+      "GQ 6: Are we using data to effectively analyze and monitor student performance?": [
+        {
+          "Key Indicator": "Campus has a data meeting schedule to analyze assessment data",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Frequency of data meetings is relevant to assessment periods",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Special Populations teachers attend and engage in data meetings",
+          "Value": true
+        },
+        {
+          "Key Indicator": "IL use consistent data analysis protocols or agenda with steps for analyzing student performance",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Evidence of instructional adjustments based on student data",
+          "Value": false
+        },
+        {
+          "Key Indicator": "Campus leaders give feedback on instructional adjustments based on student data",
+          "Value": false
+        }
+      ]
+    }
+  },
+  "Johnson Middle School": {
+    "Conditions": {
+      "GQ 1: Are we placing the strongest teachers with the highest-needs students?": [
+        {
+          "Key Indicator": "Placement and hiring decisions are informed by campus-level student need and teacher effectiveness data",
+          "Value": true
+        },
+        {
+          "Key Indicator": "New teachers (<2 years) receive induction and mentorship from high-performing educators, identified through appraisal data, to support their professional growth and classroom success",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Average years of teacher experience greater than 3 years",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Certified vs non certified ratio greater than 75% in core content areas",
+          "Value": true
+        },
+        {
+          "Key Indicator": "75%+ of teachers are rated proficient or above on T-TESS (or other district system)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "75%+ of eligible teachers earning a designation on TIA (or other district system)",
+          "Value": false
+        }
+      ],
+      "GQ 2: Are we creating the conditions for student learning?": [
+        {
+          "Key Indicator": "Written behavior expectations with clear expectations for classroom and common areas",
+          "Value": true
+        },
+        {
+          "Key Indicator": "100% of staff trained on and understand campus behavior expectations",
+          "Value": true
+        },
+        {
+          "Key Indicator": "90% of classrooms observed demonstrating clear behavioral expectations, routines, and procedures",
+          "Value": true
+        },
+        {
+          "Key Indicator": "90% of students observed following school-wide expectations in common areas",
+          "Value": false
+        },
+        {
+          "Key Indicator": "90% of teachers observed (communicating, modeling, and reinforcing behavioral expectations",
+          "Value": false
+        }
+      ]
+    },
+    "Instruction": {
+      "GQ 3: Are the instructional materials high-quality?": [
+        {
+          "Key Indicator": "Materials utilized in the curriculum identified in the Certification of Provision of Instructional Materials Survey 2025-2026",
+          "Value": false
+        },
+        {
+          "Key Indicator": "Lever 4 Local Classroom Review Report",
+          "Value": false
+        }
+      ],
+      "GQ 4: Are research-based instructional strategies being implemented?": [
+        {
+          "Key Indicator": "District/Campus has an Instructional Framework for RLA",
+          "Value": true
+        },
+        {
+          "Key Indicator": "District/Campus has an Instructional Framework for Math",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of RLA Foundational Skills RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of RLA Text Complexity RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of RLA Knowledge Coherence RBIS Observed",
+          "Value": false
+        },
+        {
+          "Key Indicator": "% of RLA Text Based Responses RBIS Observed",
+          "Value": false
+        },
+        {
+          "Key Indicator": "% of Math Balanced Conceptual and Procedural RBIS Observed",
+          "Value": false
+        },
+        {
+          "Key Indicator": "% of Math Depth of Key Concepts RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of Math Coherence of Key Concepts RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of Math Productive Struggle RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Instructional leaders provide Internalization Tools/Protocols for planning (4.1.3)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "PLC observed instructional leaders and teachers engaged in internalization process (4.1.3)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Instructional leaders have a process for Lesson Review and Feedback (4.1.4)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Evidence of lesson review and feedback consistent for all teachers (4.1.4)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Special populations teachers participant in internalization and planning meetings",
+          "Value": false
+        }
+      ]
+    },
+    "Support": {
+      "GQ 5: Are we building teacher capacity through observation and feedback cycles?": [
+        {
+          "Key Indicator": "100% of teachers have campus leader assigned for observation and coaching",
+          "Value": true
+        },
+        {
+          "Key Indicator": "IL have walkthrough/ observation schedules that include all teachers",
+          "Value": true
+        },
+        {
+          "Key Indicator": "IL use consistent Observation/Coaching Walk Through Tool",
+          "Value": false
+        },
+        {
+          "Key Indicator": "IL use consistent Observation/Coaching Tracker",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Teacher action steps based on observation data include both behavior management and instructional focus",
+          "Value": false
+        },
+        {
+          "Key Indicator": "85%+ of teachers report that feedback helps them grow instructionally",
+          "Value": true
+        },
+        {
+          "Key Indicator": "75%+ of teachers show growth in instructional practice across the semester/year",
+          "Value": true
+        }
+      ],
+      "GQ 6: Are we using data to effectively analyze and monitor student performance?": [
+        {
+          "Key Indicator": "Campus has a data meeting schedule to analyze assessment data",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Frequency of data meetings is relevant to assessment periods",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Special Populations teachers attend and engage in data meetings",
+          "Value": true
+        },
+        {
+          "Key Indicator": "IL use consistent data analysis protocols or agenda with steps for analyzing student performance",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Evidence of instructional adjustments based on student data",
+          "Value": false
+        },
+        {
+          "Key Indicator": "Campus leaders give feedback on instructional adjustments based on student data",
+          "Value": false
+        }
+      ]
+    }
+  },
+  "Hills Middle School": {
+    "Conditions": {
+      "GQ 1: Are we placing the strongest teachers with the highest-needs students?": [
+        {
+          "Key Indicator": "Placement and hiring decisions are informed by campus-level student need and teacher effectiveness data",
+          "Value": false
+        },
+        {
+          "Key Indicator": "New teachers (<2 years) receive induction and mentorship from high-performing educators, identified through appraisal data, to support their professional growth and classroom success",
+          "Value": false
+        },
+        {
+          "Key Indicator": "Average years of teacher experience greater than 3 years",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Certified vs non certified ratio greater than 75% in core content areas",
+          "Value": false
+        },
+        {
+          "Key Indicator": "75%+ of teachers are rated proficient or above on T-TESS (or other district system)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "75%+ of eligible teachers earning a designation on TIA (or other district system)",
+          "Value": false
+        }
+      ],
+      "GQ 2: Are we creating the conditions for student learning?": [
+        {
+          "Key Indicator": "Written behavior expectations with clear expectations for classroom and common areas",
+          "Value": true
+        },
+        {
+          "Key Indicator": "100% of staff trained on and understand campus behavior expectations",
+          "Value": false
+        },
+        {
+          "Key Indicator": "90% of classrooms observed demonstrating clear behavioral expectations, routines, and procedures",
+          "Value": true
+        },
+        {
+          "Key Indicator": "90% of students observed following school-wide expectations in common areas",
+          "Value": false
+        },
+        {
+          "Key Indicator": "90% of teachers observed (communicating, modeling, and reinforcing behavioral expectations",
+          "Value": false
+        }
+      ]
+    },
+    "Instruction": {
+      "GQ 3: Are the instructional materials high-quality?": [
+        {
+          "Key Indicator": "Materials utilized in the curriculum identified in the Certification of Provision of Instructional Materials Survey 2025-2026",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Lever 4 Local Classroom Review Report",
+          "Value": true
+        }
+      ],
+      "GQ 4: Are research-based instructional strategies being implemented?": [
+        {
+          "Key Indicator": "District/Campus has an Instructional Framework for RLA",
+          "Value": true
+        },
+        {
+          "Key Indicator": "District/Campus has an Instructional Framework for Math",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of RLA Foundational Skills RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of RLA Text Complexity RBIS Observed",
+          "Value": false
+        },
+        {
+          "Key Indicator": "% of RLA Knowledge Coherence RBIS Observed",
+          "Value": false
+        },
+        {
+          "Key Indicator": "% of RLA Text Based Responses RBIS Observed",
+          "Value": false
+        },
+        {
+          "Key Indicator": "% of Math Balanced Conceptual and Procedural RBIS Observed",
+          "Value": false
+        },
+        {
+          "Key Indicator": "% of Math Depth of Key Concepts RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of Math Coherence of Key Concepts RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of Math Productive Struggle RBIS Observed",
+          "Value": false
+        },
+        {
+          "Key Indicator": "Instructional leaders provide Internalization Tools/Protocols for planning (4.1.3)",
+          "Value": false
+        },
+        {
+          "Key Indicator": "PLC observed instructional leaders and teachers engaged in internalization process (4.1.3)",
+          "Value": false
+        },
+        {
+          "Key Indicator": "Instructional leaders have a process for Lesson Review and Feedback (4.1.4)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Evidence of lesson review and feedback consistent for all teachers (4.1.4)",
+          "Value": false
+        },
+        {
+          "Key Indicator": "Special populations teachers participant in internalization and planning meetings",
+          "Value": false
+        }
+      ]
+    },
+    "Support": {
+      "GQ 5: Are we building teacher capacity through observation and feedback cycles?": [
+        {
+          "Key Indicator": "100% of teachers have campus leader assigned for observation and coaching",
+          "Value": true
+        },
+        {
+          "Key Indicator": "IL have walkthrough/ observation schedules that include all teachers",
+          "Value": true
+        },
+        {
+          "Key Indicator": "IL use consistent Observation/Coaching Walk Through Tool",
+          "Value": false
+        },
+        {
+          "Key Indicator": "IL use consistent Observation/Coaching Tracker",
+          "Value": false
+        },
+        {
+          "Key Indicator": "Teacher action steps based on observation data include both behavior management and instructional focus",
+          "Value": false
+        },
+        {
+          "Key Indicator": "85%+ of teachers report that feedback helps them grow instructionally",
+          "Value": true
+        },
+        {
+          "Key Indicator": "75%+ of teachers show growth in instructional practice across the semester/year",
+          "Value": true
+        }
+      ],
+      "GQ 6: Are we using data to effectively analyze and monitor student performance?": [
+        {
+          "Key Indicator": "Campus has a data meeting schedule to analyze assessment data",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Frequency of data meetings is relevant to assessment periods",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Special Populations teachers attend and engage in data meetings",
+          "Value": false
+        },
+        {
+          "Key Indicator": "IL use consistent data analysis protocols or agenda with steps for analyzing student performance",
+          "Value": false
+        },
+        {
+          "Key Indicator": "Evidence of instructional adjustments based on student data",
+          "Value": false
+        },
+        {
+          "Key Indicator": "Campus leaders give feedback on instructional adjustments based on student data",
+          "Value": false
+        }
+      ]
+    }
+  },
+  "Acme High School": {
+    "Conditions": {
+      "GQ 1: Are we placing the strongest teachers with the highest-needs students?": [
+        {
+          "Key Indicator": "Placement and hiring decisions are informed by campus-level student need and teacher effectiveness data",
+          "Value": true
+        },
+        {
+          "Key Indicator": "New teachers (<2 years) receive induction and mentorship from high-performing educators, identified through appraisal data, to support their professional growth and classroom success",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Average years of teacher experience greater than 3 years",
+          "Value": false
+        },
+        {
+          "Key Indicator": "Certified vs non certified ratio greater than 75% in core content areas",
+          "Value": false
+        },
+        {
+          "Key Indicator": "75%+ of teachers are rated proficient or above on T-TESS (or other district system)",
+          "Value": false
+        },
+        {
+          "Key Indicator": "75%+ of eligible teachers earning a designation on TIA (or other district system)",
+          "Value": false
+        }
+      ],
+      "GQ 2: Are we creating the conditions for student learning?": [
+        {
+          "Key Indicator": "Written behavior expectations with clear expectations for classroom and common areas",
+          "Value": true
+        },
+        {
+          "Key Indicator": "100% of staff trained on and understand campus behavior expectations",
+          "Value": true
+        },
+        {
+          "Key Indicator": "90% of classrooms observed demonstrating clear behavioral expectations, routines, and procedures",
+          "Value": false
+        },
+        {
+          "Key Indicator": "90% of students observed following school-wide expectations in common areas",
+          "Value": false
+        },
+        {
+          "Key Indicator": "90% of teachers observed (communicating, modeling, and reinforcing behavioral expectations",
+          "Value": false
+        }
+      ]
+    },
+    "Instruction": {
+      "GQ 3: Are the instructional materials high-quality?": [
+        {
+          "Key Indicator": "Materials utilized in the curriculum identified in the Certification of Provision of Instructional Materials Survey 2025-2026",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Lever 4 Local Classroom Review Report",
+          "Value": true
+        }
+      ],
+      "GQ 4: Are research-based instructional strategies being implemented?": [
+        {
+          "Key Indicator": "District/Campus has an Instructional Framework for RLA",
+          "Value": true
+        },
+        {
+          "Key Indicator": "District/Campus has an Instructional Framework for Math",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of RLA Foundational Skills RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of RLA Text Complexity RBIS Observed",
+          "Value": false
+        },
+        {
+          "Key Indicator": "% of RLA Knowledge Coherence RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of RLA Text Based Responses RBIS Observed",
+          "Value": false
+        },
+        {
+          "Key Indicator": "% of Math Balanced Conceptual and Procedural RBIS Observed",
+          "Value": false
+        },
+        {
+          "Key Indicator": "% of Math Depth of Key Concepts RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of Math Coherence of Key Concepts RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of Math Productive Struggle RBIS Observed",
+          "Value": false
+        },
+        {
+          "Key Indicator": "Instructional leaders provide Internalization Tools/Protocols for planning (4.1.3)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "PLC observed instructional leaders and teachers engaged in internalization process (4.1.3)",
+          "Value": false
+        },
+        {
+          "Key Indicator": "Instructional leaders have a process for Lesson Review and Feedback (4.1.4)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Evidence of lesson review and feedback consistent for all teachers (4.1.4)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Special populations teachers participant in internalization and planning meetings",
+          "Value": false
+        }
+      ]
+    },
+    "Support": {
+      "GQ 5: Are we building teacher capacity through observation and feedback cycles?": [
+        {
+          "Key Indicator": "100% of teachers have campus leader assigned for observation and coaching",
+          "Value": true
+        },
+        {
+          "Key Indicator": "IL have walkthrough/ observation schedules that include all teachers",
+          "Value": true
+        },
+        {
+          "Key Indicator": "IL use consistent Observation/Coaching Walk Through Tool",
+          "Value": false
+        },
+        {
+          "Key Indicator": "IL use consistent Observation/Coaching Tracker",
+          "Value": false
+        },
+        {
+          "Key Indicator": "Teacher action steps based on observation data include both behavior management and instructional focus",
+          "Value": false
+        },
+        {
+          "Key Indicator": "85%+ of teachers report that feedback helps them grow instructionally",
+          "Value": false
+        },
+        {
+          "Key Indicator": "75%+ of teachers show growth in instructional practice across the semester/year",
+          "Value": false
+        }
+      ],
+      "GQ 6: Are we using data to effectively analyze and monitor student performance?": [
+        {
+          "Key Indicator": "Campus has a data meeting schedule to analyze assessment data",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Frequency of data meetings is relevant to assessment periods",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Special Populations teachers attend and engage in data meetings",
+          "Value": false
+        },
+        {
+          "Key Indicator": "IL use consistent data analysis protocols or agenda with steps for analyzing student performance",
+          "Value": false
+        },
+        {
+          "Key Indicator": "Evidence of instructional adjustments based on student data",
+          "Value": false
+        },
+        {
+          "Key Indicator": "Campus leaders give feedback on instructional adjustments based on student data",
+          "Value": false
+        }
+      ]
+    }
+  },
+  "Hill Valley High School": {
+    "Conditions": {
+      "GQ 1: Are we placing the strongest teachers with the highest-needs students?": [
+        {
+          "Key Indicator": "Placement and hiring decisions are informed by campus-level student need and teacher effectiveness data",
+          "Value": true
+        },
+        {
+          "Key Indicator": "New teachers (<2 years) receive induction and mentorship from high-performing educators, identified through appraisal data, to support their professional growth and classroom success",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Average years of teacher experience greater than 3 years",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Certified vs non certified ratio greater than 75% in core content areas",
+          "Value": true
+        },
+        {
+          "Key Indicator": "75%+ of teachers are rated proficient or above on T-TESS (or other district system)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "75%+ of eligible teachers earning a designation on TIA (or other district system)",
+          "Value": true
+        }
+      ],
+      "GQ 2: Are we creating the conditions for student learning?": [
+        {
+          "Key Indicator": "Written behavior expectations with clear expectations for classroom and common areas",
+          "Value": true
+        },
+        {
+          "Key Indicator": "100% of staff trained on and understand campus behavior expectations",
+          "Value": true
+        },
+        {
+          "Key Indicator": "90% of classrooms observed demonstrating clear behavioral expectations, routines, and procedures",
+          "Value": true
+        },
+        {
+          "Key Indicator": "90% of students observed following school-wide expectations in common areas",
+          "Value": true
+        },
+        {
+          "Key Indicator": "90% of teachers observed (communicating, modeling, and reinforcing behavioral expectations",
+          "Value": false
+        }
+      ]
+    },
+    "Instruction": {
+      "GQ 3: Are the instructional materials high-quality?": [
+        {
+          "Key Indicator": "Materials utilized in the curriculum identified in the Certification of Provision of Instructional Materials Survey 2025-2026",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Lever 4 Local Classroom Review Report",
+          "Value": true
+        }
+      ],
+      "GQ 4: Are research-based instructional strategies being implemented?": [
+        {
+          "Key Indicator": "District/Campus has an Instructional Framework for RLA",
+          "Value": true
+        },
+        {
+          "Key Indicator": "District/Campus has an Instructional Framework for Math",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of RLA Foundational Skills RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of RLA Text Complexity RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of RLA Knowledge Coherence RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of RLA Text Based Responses RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of Math Balanced Conceptual and Procedural RBIS Observed",
+          "Value": false
+        },
+        {
+          "Key Indicator": "% of Math Depth of Key Concepts RBIS Observed",
+          "Value": false
+        },
+        {
+          "Key Indicator": "% of Math Coherence of Key Concepts RBIS Observed",
+          "Value": false
+        },
+        {
+          "Key Indicator": "% of Math Productive Struggle RBIS Observed",
+          "Value": false
+        },
+        {
+          "Key Indicator": "Instructional leaders provide Internalization Tools/Protocols for planning (4.1.3)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "PLC observed instructional leaders and teachers engaged in internalization process (4.1.3)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Instructional leaders have a process for Lesson Review and Feedback (4.1.4)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Evidence of lesson review and feedback consistent for all teachers (4.1.4)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Special populations teachers participant in internalization and planning meetings",
+          "Value": false
+        }
+      ]
+    },
+    "Support": {
+      "GQ 5: Are we building teacher capacity through observation and feedback cycles?": [
+        {
+          "Key Indicator": "100% of teachers have campus leader assigned for observation and coaching",
+          "Value": true
+        },
+        {
+          "Key Indicator": "IL have walkthrough/ observation schedules that include all teachers",
+          "Value": true
+        },
+        {
+          "Key Indicator": "IL use consistent Observation/Coaching Walk Through Tool",
+          "Value": true
+        },
+        {
+          "Key Indicator": "IL use consistent Observation/Coaching Tracker",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Teacher action steps based on observation data include both behavior management and instructional focus",
+          "Value": false
+        },
+        {
+          "Key Indicator": "85%+ of teachers report that feedback helps them grow instructionally",
+          "Value": true
+        },
+        {
+          "Key Indicator": "75%+ of teachers show growth in instructional practice across the semester/year",
+          "Value": false
+        }
+      ],
+      "GQ 6: Are we using data to effectively analyze and monitor student performance?": [
+        {
+          "Key Indicator": "Campus has a data meeting schedule to analyze assessment data",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Frequency of data meetings is relevant to assessment periods",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Special Populations teachers attend and engage in data meetings",
+          "Value": true
+        },
+        {
+          "Key Indicator": "IL use consistent data analysis protocols or agenda with steps for analyzing student performance",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Evidence of instructional adjustments based on student data",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Campus leaders give feedback on instructional adjustments based on student data",
+          "Value": false
+        }
+      ]
+    }
+  },
+  "Bayside High School": {
+    "Conditions": {
+      "GQ 1: Are we placing the strongest teachers with the highest-needs students?": [
+        {
+          "Key Indicator": "Placement and hiring decisions are informed by campus-level student need and teacher effectiveness data",
+          "Value": true
+        },
+        {
+          "Key Indicator": "New teachers (<2 years) receive induction and mentorship from high-performing educators, identified through appraisal data, to support their professional growth and classroom success",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Average years of teacher experience greater than 3 years",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Certified vs non certified ratio greater than 75% in core content areas",
+          "Value": true
+        },
+        {
+          "Key Indicator": "75%+ of teachers are rated proficient or above on T-TESS (or other district system)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "75%+ of eligible teachers earning a designation on TIA (or other district system)",
+          "Value": false
+        }
+      ],
+      "GQ 2: Are we creating the conditions for student learning?": [
+        {
+          "Key Indicator": "Written behavior expectations with clear expectations for classroom and common areas",
+          "Value": true
+        },
+        {
+          "Key Indicator": "100% of staff trained on and understand campus behavior expectations",
+          "Value": true
+        },
+        {
+          "Key Indicator": "90% of classrooms observed demonstrating clear behavioral expectations, routines, and procedures",
+          "Value": true
+        },
+        {
+          "Key Indicator": "90% of students observed following school-wide expectations in common areas",
+          "Value": true
+        },
+        {
+          "Key Indicator": "90% of teachers observed (communicating, modeling, and reinforcing behavioral expectations",
+          "Value": true
+        }
+      ]
+    },
+    "Instruction": {
+      "GQ 3: Are the instructional materials high-quality?": [
+        {
+          "Key Indicator": "Materials utilized in the curriculum identified in the Certification of Provision of Instructional Materials Survey 2025-2026",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Lever 4 Local Classroom Review Report",
+          "Value": true
+        }
+      ],
+      "GQ 4: Are research-based instructional strategies being implemented?": [
+        {
+          "Key Indicator": "District/Campus has an Instructional Framework for RLA",
+          "Value": true
+        },
+        {
+          "Key Indicator": "District/Campus has an Instructional Framework for Math",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of RLA Foundational Skills RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of RLA Text Complexity RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of RLA Knowledge Coherence RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of RLA Text Based Responses RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of Math Balanced Conceptual and Procedural RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of Math Depth of Key Concepts RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of Math Coherence of Key Concepts RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "% of Math Productive Struggle RBIS Observed",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Instructional leaders provide Internalization Tools/Protocols for planning (4.1.3)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "PLC observed instructional leaders and teachers engaged in internalization process (4.1.3)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Instructional leaders have a process for Lesson Review and Feedback (4.1.4)",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Evidence of lesson review and feedback consistent for all teachers (4.1.4)",
+          "Value": false
+        },
+        {
+          "Key Indicator": "Special populations teachers participant in internalization and planning meetings",
+          "Value": false
+        }
+      ]
+    },
+    "Support": {
+      "GQ 5: Are we building teacher capacity through observation and feedback cycles?": [
+        {
+          "Key Indicator": "100% of teachers have campus leader assigned for observation and coaching",
+          "Value": true
+        },
+        {
+          "Key Indicator": "IL have walkthrough/ observation schedules that include all teachers",
+          "Value": true
+        },
+        {
+          "Key Indicator": "IL use consistent Observation/Coaching Walk Through Tool",
+          "Value": true
+        },
+        {
+          "Key Indicator": "IL use consistent Observation/Coaching Tracker",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Teacher action steps based on observation data include both behavior management and instructional focus",
+          "Value": true
+        },
+        {
+          "Key Indicator": "85%+ of teachers report that feedback helps them grow instructionally",
+          "Value": true
+        },
+        {
+          "Key Indicator": "75%+ of teachers show growth in instructional practice across the semester/year",
+          "Value": true
+        }
+      ],
+      "GQ 6: Are we using data to effectively analyze and monitor student performance?": [
+        {
+          "Key Indicator": "Campus has a data meeting schedule to analyze assessment data",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Frequency of data meetings is relevant to assessment periods",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Special Populations teachers attend and engage in data meetings",
+          "Value": true
+        },
+        {
+          "Key Indicator": "IL use consistent data analysis protocols or agenda with steps for analyzing student performance",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Evidence of instructional adjustments based on student data",
+          "Value": true
+        },
+        {
+          "Key Indicator": "Campus leaders give feedback on instructional adjustments based on student data",
+          "Value": true
+        }
+      ]
+    }
+  }
+}

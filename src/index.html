@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>District ESF Treemap Prototype</title>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/treemap.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
+  <link rel="stylesheet" href="styles.css">
+  <script src="treemap.js"></script>
+</head>
+
+<body>
+  <h1>District ESF Treemap Prototype</h1>
+  
+  <!-- Page Navigation -->
+  <div class="navigation">
+    <a href="index.html" class="nav-btn active">📊 Treemap View</a>
+    <a href="bar-charts.html" class="nav-btn">📈 Bar Charts</a>
+  </div>
+  
+  <!-- Navigation Controls -->
+  <div class="controls">
+    <button id="backBtn" class="back-btn" onclick="goBack()" disabled>← Back</button>
+    <button id="homeBtn" class="back-btn" onclick="goHome()">🏠 Home</button>
+  </div>
+  
+  <div id="breadcrumb" class="breadcrumb">Home</div>
+  <div id="container"></div>
+  
+  <!-- Export Controls -->
+  <div class="export-controls">
+    <button class="export-btn" onclick="exportChart('png')">Export PNG</button>
+    <button class="export-btn" onclick="exportChart('pdf')">Export PDF</button>
+    <button class="export-btn" onclick="exportChart('csv')">Export CSV</button>
+  </div>
+  
+  <!-- School Detail Modal -->
+  <div id="schoolModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title" id="modalTitle">School Details</div>
+        <button class="close-btn" onclick="closeSchoolModal()">× Close</button>
+      </div>
+      <div id="modalBody">
+        <!-- Table will be inserted here -->
+      </div>
+    </div>
+    </div>
+</body>
+</html> 
