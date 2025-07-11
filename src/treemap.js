@@ -118,9 +118,9 @@ function navigateToLevel(levelIndex) {
  */
 function getThemeColor(theme) {
   switch (theme) {
-    case 'Conditions': return '#4A90E2'; // Blue
-    case 'Instruction': return '#7ED321'; // Green
-    case 'Support': return '#F5A623'; // Orange
+    case 'Conditions': return '#007bff'; // Blue
+    case 'Instruction': return '#28a745'; // Green
+    case 'Support': return '#fd7e14'; // Orange
     default: return '#9B9B9B'; // Gray
   }
 }
@@ -130,9 +130,9 @@ function getThemeColor(theme) {
  */
 function getDarkerThemeColor(theme) {
   switch (theme) {
-    case 'Conditions': return '#357ABD'; // Darker blue
-    case 'Instruction': return '#6BB01A'; // Darker green
-    case 'Support': return '#E0941A'; // Darker orange
+    case 'Conditions': return '#499af1'; // Darker blue
+    case 'Instruction': return '#47bc62'; // Darker green
+    case 'Support': return '#f99849'; // Darker orange
     default: return '#7A7A7A'; // Darker gray
   }
 }
@@ -395,7 +395,7 @@ function renderDrillDownView() {
         
         data.push({
           id: `indicator-${idCounter++}`,
-          name: `${indicatorName}<br/><span style="font-size: 0.8em; opacity: 0.8;">${indicatorValue} schools</span>`,
+          name: `<span style="font-size: 1.25em; opacity: 1; padding:0 16px;">${indicatorName}</span><br/><br/><span style="font-size: 1.5em; opacity: 1;">${indicatorValue} schools</span><br/><span style="font-size: .95em; opacity: .75;">met the criteria</span>`,
           value: indicatorValue,
           parent: gqId,
           fullKey: fullKey,
@@ -510,7 +510,7 @@ function renderDrillDownView() {
           headers: true,
           enabled: true,
           style: {
-            fontSize: '.75em',
+            fontSize: '1em',
             fontWeight: 'normal',
             color: 'var(--highcharts-neutral-color-100, #000)'
           }
@@ -729,14 +729,14 @@ function generateSchoolTable(schoolName) {
         
         // Category column with rowspan
         if (!categoryRowspanUsed[category]) {
-          tableHTML += `<td class="category-header" rowspan="${categoryRowspans[category]}">${category}</td>`;
+          tableHTML += `<td class="category-header ${category}" rowspan="${categoryRowspans[category]}">${category}</td>`;
           categoryRowspanUsed[category] = true;
         }
         
         // Guiding question column with rowspan
         const gqKey = `${category}-${gqName}`;
         if (!gqRowspanUsed[gqKey]) {
-          tableHTML += `<td class="gq-header" rowspan="${gqRowspans[gqKey]}">${gqName}</td>`;
+          tableHTML += `<td class="gq-header ${category}" rowspan="${gqRowspans[gqKey]}">${gqName}</td>`;
           gqRowspanUsed[gqKey] = true;
         }
         

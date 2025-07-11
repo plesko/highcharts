@@ -241,14 +241,38 @@
       font-weight: bold;
     }
     
-    .category-header {
+    .category-header.Conditions {
       background-color: #007bff !important;
       color: white !important;
       font-weight: bold;
     }
+
+    .category-header.Instruction {
+      background-color: #28a745 !important;
+      color: white !important;
+      font-weight: bold;
+    }
+
+    .category-header.Support {
+      background-color: #fd7e14 !important;
+      color: white !important;
+      font-weight: bold;
+    }
     
-    .gq-header {
-      background-color: #6c757d !important;
+    .gq-header.Conditions  {
+      background-color: #499af1 !important;
+      color: white !important;
+      font-weight: bold;
+    }
+
+    .gq-header.Instruction {
+      background-color: #47bc62 !important;
+      color: white !important;
+      font-weight: bold;
+    }
+
+    .gq-header.Support {
+      background-color: #f99849 !important;
       color: white !important;
       font-weight: bold;
     }
@@ -855,12 +879,12 @@
               // Category column - only add on first row of category
               if (isFirstCategoryRow) {
                 const totalCategoryRows = getCategoryRowspan(organizedData[category]);
-                tableHTML += `<td class="category-header" rowspan="${totalCategoryRows}">${category}</td>`;
+                tableHTML += `<td class="category-header ${category}" rowspan="${totalCategoryRows}">${category}</td>`;
               }
               
               // Guiding Question column - only add on first row of GQ
               if (isFirstGQRow) {
-                tableHTML += `<td class="gq-header" rowspan="${indicators.length}">${gqName}</td>`;
+                tableHTML += `<td class="gq-header ${category}" rowspan="${indicators.length}">${gqName}</td>`;
               }
               
               // Indicator and Response columns - always add
