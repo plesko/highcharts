@@ -242,7 +242,8 @@ function renderHomeView() {
         color: getThemeColor(theme),
         isTheme: true,
         totalPossible: totalPossible,
-        percentage: percentage
+        percentage: percentage,
+        sortIndex: order.indexOf(theme)
       });
     }
   });
@@ -266,11 +267,12 @@ function renderHomeView() {
       alternateStartingDirection: true,
       dataLabels: {
         enabled: true,
-        format: '{point.name}<br/><span style="font-size: 0.8em; opacity: 0.8;">{point.percentage}%</span>',
+        format: '{point.name}<br/><span style="font-size: 1em; opacity: 0.8;">{point.percentage}%</span>',
         style: {
           textOutline: 'none'
         }
       },
+      sortIndex: 0,
       borderRadius: 2,
       levels: [{
         level: 1,
