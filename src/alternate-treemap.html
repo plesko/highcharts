@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>District ESF Alternate Treemap</title>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/treemap.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
+  
+  <style>
+    * {
+      font-family: sans-serif;
+    }
+    
+    body {
+      margin: 0;
+      padding: 20px;
+      background-color: #f8f9fa;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .navigation {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .nav-btn {
+      padding: 12px 24px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background-color 0.2s;
+    }
+    
+    .nav-btn:hover {
+      background: #0056b3;
+    }
+    
+    .nav-btn.active {
+      background: #28a745;
+    }
+    
+    .chart-container {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+      padding: 20px;
+    }
+    
+    .chart-wrapper {
+      height: 600px;
+      margin-bottom: 20px;
+    }
+    
+    .export-controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    
+    .export-btn {
+      padding: 8px 16px;
+      background: #6c757d;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.2s;
+    }
+    
+    .export-btn:hover {
+      background: #545b62;
+    }
+    
+    .controls {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    
+    .control-btn {
+      padding: 8px 16px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.2s;
+    }
+    
+    .control-btn:hover {
+      background: #0056b3;
+    }
+    
+    .control-btn:disabled {
+      background: #6c757d;
+      cursor: not-allowed;
+    }
+    
+    .breadcrumb {
+      font-size: 1.1em;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    
+    .breadcrumb-item {
+      display: inline-block;
+    }
+    
+    .breadcrumb-item.clickable {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    
+    .breadcrumb-item.active {
+      color: #007bff;
+    }
+    
+    /* Modal styles for indicator table view */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+    }
+    
+    .modal-content {
+      background-color: white;
+      margin: 5% auto;
+      padding: 20px;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 1200px;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #eee;
+    }
+    
+    .modal-title {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #333;
+    }
+    
+    .close-btn {
+      background: #dc3545;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    
+    .close-btn:hover {
+      background: #c82333;
+    }
+    
+    .indicator-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    
+    .indicator-table th,
+    .indicator-table td {
+      border: 1px solid #ddd;
+      padding: 8px 12px;
+      text-align: left;
+    }
+    
+    .indicator-table th {
+      background-color: #f8f9fa;
+      font-weight: bold;
+      color: #333;
+    }
+    
+    .indicator-table tr:nth-child(even) {
+      background-color: #f8f9fa;
+    }
+    
+    .indicator-table tr:hover {
+      background-color: #e9ecef;
+    }
+    
+    .response-true {
+      color: #28a745;
+      font-weight: bold;
+    }
+    
+    .response-false {
+      color: #dc3545;
+      font-weight: bold;
+    }
+    
+    .category-header {
+      background-color: #007bff !important;
+      color: white !important;
+      font-weight: bold;
+    }
+    
+    .gq-header {
+      background-color: #6c757d !important;
+      color: white !important;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <h1>District ESF Alternate Treemap</h1>
+    <p>Guiding Questions → Schools → Indicators visualization</p>
+  </div>
+  
+  <div class="navigation">
+    <a href="index.html" class="nav-btn">📊 Treemap View</a>
+    <a href="bar-charts.html" class="nav-btn">📈 Bar Charts</a>
+    <a href="alternate-treemap.html" class="nav-btn active">🌳 Alternate Treemap</a>
+  </div>
+  
+  <div class="chart-container">
+    <div class="controls">
+      <button id="backBtn" class="control-btn" onclick="goBack()" disabled>← Back</button>
+      <button class="control-btn" onclick="goHome()">🏠 Home</button>
+    </div>
+    
+    <div id="breadcrumb" class="breadcrumb">
+      <span class="breadcrumb-item active">Home</span>
+    </div>
+    
+    <div id="container" class="chart-wrapper"></div>
+  </div>
+  
+  <!-- Indicator Detail Modal -->
+  <div id="indicatorModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title" id="modalTitle">Indicator Details</div>
+        <button class="close-btn" onclick="closeIndicatorModal()">× Close</button>
+      </div>
+      <div id="modalBody">
+        <!-- Table will be inserted here -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ============================================================================
+    // GLOBAL VARIABLES
+    // ============================================================================
+    let chart;
+    let currentLevel = 'home';
+    let navigationStack = [];
+    let allData;
+    let originalJsonData;
+
+    // ============================================================================
+    // NAVIGATION FUNCTIONS
+    // ============================================================================
+
+    function goBack() {
+      if (navigationStack.length > 0) {
+        navigationStack.pop();
+        updateChart();
+      }
+    }
+
+    function goHome() {
+      navigationStack = [];
+      updateChart();
+    }
+
+    function handlePopState(event) {
+      if (event.state && event.state.navigationStack) {
+        navigationStack = event.state.navigationStack;
+        updateChart();
+      } else {
+        navigationStack = [];
+        updateChart();
+      }
+    }
+
+    function updateURL() {
+      const state = { navigationStack: navigationStack };
+      const url = navigationStack.length > 0 ? 
+        `#${navigationStack.map(item => item.name).join('/')}` : 
+        '#';
+      
+      window.history.pushState(state, '', url);
+    }
+
+    function updateBreadcrumb() {
+      const breadcrumb = document.getElementById('breadcrumb');
+      let breadcrumbHTML = '<span class="breadcrumb-item clickable" onclick="goHome()">Home</span>';
+      
+      navigationStack.forEach((item, index) => {
+        breadcrumbHTML += ' > ';
+        if (index === navigationStack.length - 1) {
+          breadcrumbHTML += `<span class="breadcrumb-item active">${item.name}</span>`;
+        } else {
+          breadcrumbHTML += `<span class="breadcrumb-item clickable" onclick="navigateToLevel(${index})">${item.name}</span>`;
+        }
+      });
+      
+      breadcrumb.innerHTML = breadcrumbHTML;
+    }
+
+    function navigateToLevel(levelIndex) {
+      navigationStack = navigationStack.slice(0, levelIndex + 1);
+      updateChart();
+    }
+
+    // ============================================================================
+    // COLOR FUNCTIONS
+    // ============================================================================
+
+    function getThemeColor(theme) {
+      switch (theme) {
+        case 'Conditions': return '#007bff'; // Blue
+        case 'Instruction': return '#28a745'; // Green
+        case 'Support': return '#fd7e14'; // Orange
+        default: return '#9B9B9B'; // Gray
+      }
+    }
+
+    function getDarkerThemeColor(theme) {
+      switch (theme) {
+        case 'Conditions': return '#499af1'; // Darker blue
+        case 'Instruction': return '#47bc62'; // Darker green
+        case 'Support': return '#f99849'; // Darker orange
+        default: return '#7A7A7A'; // Darker gray
+      }
+    }
+
+    function getBorderColor(theme) {
+      return '#FFFFFF'; // White borders for all themes
+    }
+
+    function getHoverBorderColor(theme) {
+      return '#FFFFFF'; // White borders for hover states
+    }
+
+    // ============================================================================
+    // CHART FUNCTIONS
+    // ============================================================================
+
+    function getSubtitleText(type) {
+      switch (type) {
+        case 'gq': return 'Click on a school to see its performance across all indicators';
+        case 'school': return 'Click on an indicator to see detailed responses';
+        default: return 'Click on a guiding question to explore schools';
+      }
+    }
+
+    function updateChart() {
+      updateBreadcrumb();
+      updateURL();
+      
+      const backBtn = document.getElementById('backBtn');
+      backBtn.disabled = navigationStack.length === 0;
+      
+      if (navigationStack.length === 0) {
+        renderHomeView();
+      } else {
+        renderDrillDownView();
+      }
+    }
+
+    function renderHomeView() {
+      currentLevel = 'home';
+      
+      // Organize data by category first, then guiding question
+      const categoryData = {};
+      const categoryOrder = ['Conditions', 'Instruction', 'Support'];
+      
+      for (const [gqName, gqDataObj] of Object.entries(originalJsonData)) {
+        const category = gqDataObj.category;
+        
+        if (!categoryData[category]) {
+          categoryData[category] = [];
+        }
+        
+        // Calculate total true responses for this guiding question
+        let totalTrue = 0;
+        let totalPossible = 0;
+        
+        for (const [indicatorName, schoolData] of Object.entries(gqDataObj)) {
+          if (indicatorName !== 'category') {
+            const schoolCount = Object.keys(schoolData).length;
+            totalPossible += schoolCount;
+            
+            for (const response of Object.values(schoolData)) {
+              if (response === true) {
+                totalTrue += 1;
+              }
+            }
+          }
+        }
+        
+        const percentage = totalPossible > 0 ? Math.round((totalTrue / totalPossible) * 100) : 0;
+        
+        categoryData[category].push({
+          name: gqName,
+          category: category,
+          trueCount: totalTrue,
+          totalPossible: totalPossible,
+          percentage: percentage
+        });
+      }
+      
+      // Create chart data with hierarchical structure
+      const data = [];
+      let idCounter = 1;
+      
+      categoryOrder.forEach(category => {
+        if (categoryData[category]) {
+          // Sort guiding questions within each category by percentage
+          categoryData[category].sort((a, b) => b.percentage - a.percentage);
+          
+          // Calculate category totals
+          const categoryTotal = categoryData[category].reduce((sum, gq) => sum + gq.trueCount, 0);
+          const categoryTotalPossible = categoryData[category].reduce((sum, gq) => sum + gq.totalPossible, 0);
+          const categoryPercentage = categoryTotalPossible > 0 ? Math.round((categoryTotal / categoryTotalPossible) * 100) : 0;
+          
+          // Add category header
+          const categoryId = `category-${idCounter++}`;
+          data.push({
+            id: categoryId,
+            name: category,
+            value: categoryTotal,
+            color: getDarkerThemeColor(category),
+            isHeader: true,
+            category: category,
+            totalPossible: categoryTotalPossible,
+            percentage: categoryPercentage
+          });
+          
+          // Add guiding questions under this category
+          categoryData[category].forEach(gq => {
+            data.push({
+              id: `gq-${idCounter++}`,
+              name: gq.name,
+              value: gq.trueCount,
+              parent: categoryId,
+              color: getThemeColor(category),
+              isGQ: true,
+              category: gq.category,
+              totalPossible: gq.totalPossible,
+              percentage: gq.percentage
+            });
+          });
+        }
+      });
+      
+      if (chart) {
+        chart.destroy();
+      }
+      
+      chart = Highcharts.chart('container', {
+        accessibility: {
+          enabled: false
+        },
+        series: [{
+          type: 'treemap',
+          layoutAlgorithm: 'squarified',
+          data: data,
+          allowDrillToNode: true,
+          cursor: 'pointer',
+          interactByLeaf: true,
+          allowTraversingTree: true,
+          alternateStartingDirection: true,
+          dataLabels: {
+            headers: true,
+            enabled: true,
+            format: '{point.name}<br/><span style="font-size: 1em; opacity: 0.8;">{point.percentage}% of schools met the criteria</span>',
+            style: {
+              textOutline: 'none',
+              textOverflow: 'ellipsis'
+            }
+          },
+          borderRadius: 2,
+          nodeSizeBy: 'leaf',
+          levels: [{
+            level: 1,
+            layoutAlgorithm: 'squarified',
+            groupPadding: 8,
+            dataLabels: {
+              headers: true,
+              enabled: true,
+              style: {
+                fontSize: '1.2em',
+                fontWeight: 'normal',
+                color: 'var(--highcharts-neutral-color-100, #000)',
+                textOverflow: 'ellipsis'
+              }
+            },
+            borderWidth: 2,
+            colorByPoint: true
+          }, {
+            level: 2,
+            groupPadding: 8,
+            dataLabels: {
+              enabled: true,
+              inside: true,
+              style: {
+                fontSize: '1em',
+                fontWeight: 'normal',
+                color: 'var(--highcharts-neutral-color-100, #000)',
+                textOverflow: 'ellipsis'
+              }
+            },
+            borderWidth: 2
+          }]
+        }],
+        title: { text: 'District ESF Performance by Category and Guiding Question' },
+        subtitle: { text: 'Click on a guiding question to explore schools' },
+        tooltip: {
+          formatter: function() {
+            const percentage = this.point.totalPossible > 0 ? 
+              Math.round((this.point.value / this.point.totalPossible) * 100) : 0;
+            if (this.point.options.parent) {
+              // Individual guiding question
+              return `<b>${this.point.name}</b><br>Category: ${this.point.category}<br>True Responses: ${this.point.value}/${this.point.totalPossible} (${percentage}%)`;
+            } else {
+              // Category header
+              return `<b>${this.point.name}</b><br>Total True Responses: ${this.point.value}/${this.point.totalPossible} (${percentage}%)`;
+            }
+          }
+        },
+        plotOptions: {
+          treemap: {
+            states: { 
+              hover: { 
+                brightness: -0.1,
+                borderColor: function() {
+                  return getHoverBorderColor(this.options.category);
+                }
+              } 
+            },
+            point: {
+              events: {
+                click: function() {
+                  if (this.options.isGQ) {
+                    navigationStack.push({ name: this.name, type: 'gq', category: this.options.category });
+                    updateChart();
+                  }
+                }
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function renderDrillDownView() {
+      const currentItem = navigationStack[navigationStack.length - 1];
+      let data = [];
+      
+      if (currentItem.type === 'gq') {
+        // Show schools for this guiding question
+        const gqData = originalJsonData[currentItem.name];
+        if (!gqData) return;
+        
+        // Calculate school performance for this guiding question
+        const schoolPerformance = {};
+        
+        for (const [indicatorName, schoolData] of Object.entries(gqData)) {
+          if (indicatorName !== 'category') {
+            for (const [schoolName, response] of Object.entries(schoolData)) {
+              if (!schoolPerformance[schoolName]) {
+                schoolPerformance[schoolName] = { true: 0, total: 0 };
+              }
+              schoolPerformance[schoolName].total += 1;
+              if (response === true) {
+                schoolPerformance[schoolName].true += 1;
+              }
+            }
+          }
+        }
+        
+        // Create data for schools
+        let idCounter = 1;
+        for (const [schoolName, performance] of Object.entries(schoolPerformance)) {
+          const percentage = performance.total > 0 ? Math.round((performance.true / performance.total) * 100) : 0;
+          const schoolColor = percentage >= 80 ? '#28a745' : percentage >= 60 ? '#ffc107' : '#dc3545';
+          
+          data.push({
+            id: `school-${idCounter++}`,
+            name: schoolName,
+            value: performance.true,
+            color: schoolColor,
+            isSchool: true,
+            total: performance.total,
+            percentage: percentage
+          });
+        }
+        
+        // Sort by percentage descending
+        data.sort((a, b) => b.percentage - a.percentage);
+        
+      } else if (currentItem.type === 'school') {
+        // Show indicators for this school
+        const gqName = navigationStack[navigationStack.length - 2].name;
+        const schoolName = currentItem.name;
+        const gqData = originalJsonData[gqName];
+        
+        if (!gqData) return;
+        
+        let idCounter = 1;
+        for (const [indicatorName, schoolData] of Object.entries(gqData)) {
+          if (indicatorName !== 'category') {
+            const response = schoolData[schoolName];
+            if (response !== undefined) {
+              const indicatorColor = response ? '#28a745' : '#dc3545';
+              
+              data.push({
+                id: `indicator-${idCounter++}`,
+                name: indicatorName,
+                value: 1,
+                color: indicatorColor,
+                isIndicator: true,
+                response: response,
+                gqName: gqName
+              });
+            }
+          }
+        }
+      }
+      
+      if (chart) {
+        chart.destroy();
+      }
+      
+      chart = Highcharts.chart('container', {
+        accessibility: {
+          enabled: false
+        },
+        series: [{
+          type: 'treemap',
+          layoutAlgorithm: 'squarified',
+          data: data,
+          allowDrillToNode: true,
+          cursor: 'pointer',
+          interactByLeaf: true,
+          allowTraversingTree: true,
+          alternateStartingDirection: true,
+          dataLabels: {
+            enabled: true,
+            format: '{point.name}<br/><span style="font-size: 1em; opacity: 0.8;">{point.percentage}%</span>',
+            style: {
+              textOutline: 'none',
+              fontWeight: 'normal',
+              textOverflow: 'ellipsis'
+            }
+          },
+          borderRadius: 2,
+          levels: [{
+            level: 1,
+            layoutAlgorithm: 'squarified',
+            dataLabels: {
+              enabled: true,
+              style: {
+                fontSize: '1em',
+                fontWeight: 'normal',
+                color: 'var(--highcharts-neutral-color-100, #000)',
+                textOverflow: 'ellipsis'
+              }
+            },
+            borderWidth: 2,
+            borderColor: '#FFFFFF'
+          }]
+        }],
+        title: { text: currentItem.name },
+        subtitle: { text: getSubtitleText(currentItem.type) },
+        tooltip: {
+          formatter: function() {
+            if (currentItem.type === 'school') {
+              const percentage = this.point.percentage || 0;
+              const value = this.point.value || 0;
+              const total = this.point.total || 0;
+              return `<b>${this.point.name}</b><br>Performance: ${percentage}% (${value}/${total})`;
+            } else if (currentItem.type === 'indicator') {
+              const response = this.point.response ? 'True' : 'False';
+              const status = this.point.response ? '✅' : '❌';
+              return `<b>${this.point.name}</b><br>${status} Response: ${response}`;
+            } else {
+              // Default tooltip for other levels
+              return `<b>${this.point.name}</b>`;
+            }
+          }
+        },
+        plotOptions: {
+          treemap: {
+            states: { 
+              hover: { 
+                brightness: -0.1,
+                borderColor: '#FFFFFF'
+              } 
+            },
+            point: {
+              events: {
+                click: function() {
+                  if (currentItem.type === 'gq' && this.options.isSchool) {
+                    navigationStack.push({ name: this.name, type: 'school' });
+                    updateChart();
+                  } else if (currentItem.type === 'school' && this.options.isIndicator) {
+                    showIndicatorModal(this.name, this.options.response, this.options.gqName);
+                  }
+                }
+              }
+            }
+          }
+        }
+      });
+    }
+
+    // ============================================================================
+    // MODAL FUNCTIONS
+    // ============================================================================
+
+    function showIndicatorModal(indicatorName, response, gqName) {
+      const modal = document.getElementById('indicatorModal');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalBody = document.getElementById('modalBody');
+      
+      modalTitle.textContent = `${indicatorName} - ${gqName}`;
+      
+      // Generate table HTML for all schools and this indicator
+      const tableHTML = generateIndicatorTable(indicatorName, gqName);
+      modalBody.innerHTML = tableHTML;
+      
+      modal.style.display = 'block';
+    }
+
+    function closeIndicatorModal() {
+      const modal = document.getElementById('indicatorModal');
+      modal.style.display = 'none';
+    }
+
+    function generateIndicatorTable(indicatorName, gqName) {
+      const gqData = originalJsonData[gqName];
+      if (!gqData || !gqData[indicatorName]) {
+        return '<p>No data available</p>';
+      }
+      
+      const schoolData = gqData[indicatorName];
+      
+      let tableHTML = '<table class="indicator-table">';
+      tableHTML += '<thead><tr><th>School</th><th>Response</th></tr></thead><tbody>';
+      
+      for (const [school, response] of Object.entries(schoolData)) {
+        tableHTML += '<tr>';
+        tableHTML += `<td>${school}</td>`;
+        tableHTML += `<td class="response-${response ? 'true' : 'false'}">${response ? 'True' : 'False'}</td>`;
+        tableHTML += '</tr>';
+      }
+      
+      tableHTML += '</tbody></table>';
+      return tableHTML;
+    }
+
+    // ============================================================================
+    // EXPORT FUNCTIONS
+    // ============================================================================
+
+    function exportChart(format) {
+      if (chart) {
+        if (format === 'csv') {
+          chart.downloadCSV();
+        } else {
+          chart.exportChart({
+            type: format,
+            filename: `alternate_treemap_${new Date().toISOString().split('T')[0]}`
+          });
+        }
+      }
+    }
+
+    // ============================================================================
+    // INITIALIZATION
+    // ============================================================================
+
+    // Load and initialize the chart
+    fetch('reorganized_school_data.json')
+      .then(response => {
+        if (!response.ok) throw new Error('Failed to load JSON');
+        return response.json();
+      })
+      .then(json => {
+        console.log('JSON loaded:', json);
+        originalJsonData = json;
+        
+        // Set up browser navigation
+        window.addEventListener('popstate', handlePopState);
+        
+        // Set up modal close on outside click
+        window.addEventListener('click', function(event) {
+          const modal = document.getElementById('indicatorModal');
+          if (event.target === modal) {
+            closeIndicatorModal();
+          }
+        });
+        
+        // Initialize chart
+        updateChart();
+      })
+      .catch(err => {
+        console.error('Error:', err);
+        document.getElementById('container').innerText = 'Error loading chart: ' + err.message;
+      });
+  </script>
+</body>
+</html> 
