@@ -246,15 +246,40 @@
     }
     
     .indicator-cell.conditions {
-      background-color: #b3d9ff !important;
+      background-color: #d3e9ff !important;
     }
     
     .indicator-cell.instruction {
-      background-color: #b8e6b8 !important;
+      background-color: #c8e9d0 !important;
     }
     
     .indicator-cell.support {
-      background-color: #ffd9b3 !important;
+      background-color: #ffe5cc !important;
+    }
+    
+    .response-cell.conditions {
+      background-color: #d3e9ff !important;
+    }
+    
+    .response-cell.instruction {
+      background-color: #c8e9d0 !important;
+    }
+    
+    .response-cell.support {
+      background-color: #ffe5cc !important;
+    }
+    
+    /* Override any conflicting styles */
+    .school-table .response-cell.conditions {
+      background-color: #d3e9ff !important;
+    }
+    
+    .school-table .response-cell.instruction {
+      background-color: #c8e9d0 !important;
+    }
+    
+    .school-table .response-cell.support {
+      background-color: #ffe5cc !important;
     }
   </style>
 </head>
@@ -303,6 +328,18 @@
       Compares the overall performance of each school across all indicators.
     </div>
     <div id="schoolChart" class="chart-wrapper"></div>
+  </div>
+  
+  <!-- Chart 4: Category Performance by School -->
+  <div class="chart-container">
+    <div class="chart-title">Category Performance by School</div>
+    <div class="chart-description">
+      Shows the success rate for each category (Conditions, Instruction, Support) grouped by school, with district average overlay.
+    </div>
+    <div class="chart-controls">
+      <button id="toggleAverage4" class="toggle-btn" onclick="toggleAverage(4)">Show District Average</button>
+    </div>
+    <div id="categoryBySchoolChart" class="chart-wrapper"></div>
   </div>
   
   <!-- School Detail Modal -->
@@ -422,6 +459,7 @@
       createGuidingQuestionGroupedChart();
       createIndicatorChart();
       createSchoolChart();
+      createCategoryBySchoolChart();
     }
     
     function createGuidingQuestionGroupedChart() {
@@ -716,6 +754,117 @@
       });
     }
     
+    function createCategoryBySchoolChart() {
+      // Calculate category performance for each school
+      const schools = new Set();
+      const categoryData = {
+        'Conditions': [],
+        'Instruction': [],
+        'Support': []
+      };
+      
+      // Collect all schools and calculate category performance
+      Object.entries(chartData).forEach(([gqName, gqData]) => {
+        const category = gqData.category;
+        if (category && categoryData[category]) {
+          Object.entries(gqData).forEach(([indicator, schoolData]) => {
+            if (indicator !== 'category' && typeof schoolData === 'object') {
+              Object.keys(schoolData).forEach(school => schools.add(school));
+            }
+          });
+        }
+      });
+      
+      // Calculate success rate for each category per school
+      const schoolList = Array.from(schools).sort();
+      schoolList.forEach(school => {
+        Object.keys(categoryData).forEach(category => {
+          let totalResponses = 0;
+          let trueResponses = 0;
+          
+          Object.entries(chartData).forEach(([gqName, gqData]) => {
+            if (gqData.category === category) {
+              Object.entries(gqData).forEach(([indicator, schoolData]) => {
+                if (indicator !== 'category' && typeof schoolData === 'object' && schoolData[school] !== undefined) {
+                  totalResponses++;
+                  if (schoolData[school] === true) {
+                    trueResponses++;
+                  }
+                }
+              });
+            }
+          });
+          
+          const successRate = totalResponses > 0 ? Math.round((trueResponses / totalResponses) * 100) : 0;
+          categoryData[category].push({
+            name: school,
+            y: successRate,
+            color: getCategoryColor(category)
+          });
+        });
+      });
+      
+      // Create series data for grouped columns
+      const series = Object.entries(categoryData).map(([category, data]) => ({
+        name: category,
+        data: data,
+        color: getCategoryColor(category)
+      }));
+      
+      // Add district average line
+      const districtAverageData = schoolList.map(school => districtAverage);
+      
+      charts.categoryBySchool = Highcharts.chart('categoryBySchoolChart', {
+        chart: { type: 'column' },
+        title: { text: null },
+        xAxis: { 
+          type: 'category',
+          labels: { style: { fontSize: '12px' } }
+        },
+        yAxis: { 
+          title: { text: 'Success Rate (%)' }, 
+          max: 100 
+        },
+        legend: { enabled: true },
+        tooltip: { 
+          formatter: function() { 
+            return `<b>${this.series.name}</b><br/>${this.point.name}<br/>Success Rate: <b>${this.point.y}%</b>`; 
+          } 
+        },
+        plotOptions: { 
+          column: { 
+            grouping: true,
+            groupPadding: 0.1,
+            pointPadding: 0.05
+          }
+        },
+        series: [
+          ...series,
+          {
+            name: 'District Average',
+            type: 'line',
+            data: districtAverageData,
+            visible: false,
+            color: '#6c757d',
+            lineWidth: 2,
+            marker: { enabled: true }
+          }
+        ],
+        exporting: { 
+          enabled: true,
+          buttons: {
+            contextButton: {
+              menuItems: ['downloadPNG', 'downloadJPEG', 'downloadPDF', 'downloadSVG', 'downloadCSV', 'downloadXLS'],
+              x: -10,
+              y: 10,
+              align: 'right',
+              verticalAlign: 'top'
+            }
+          }
+        }
+      });
+    }
+    
     function getCategoryColor(category) {
       switch (category) {
         case 'Conditions': return '#007bff';
@@ -740,7 +889,15 @@
     
     function toggleAverage(chartId) {
       const button = document.getElementById(`toggleAverage${chartId}`);
-      const chart = chartId === 1 ? charts.guidingQuestionGrouped : charts.indicator;
+      let chart;
+      
+      if (chartId === 1) {
+        chart = charts.guidingQuestionGrouped;
+      } else if (chartId === 2) {
+        chart = charts.indicator;
+      } else if (chartId === 4) {
+        chart = charts.categoryBySchool;
+      }
       
       if (chart) {
         const averageSeries = chart.series.find(s => s.name === 'District Average');
@@ -863,9 +1020,9 @@
               const categoryClass = category.toLowerCase();
               
               tableHTML += '<tr>';
-              
               if (isFirstCategoryRow) {
                 const totalCategoryRows = getCategoryRowspan(organizedData[category]);
+                console.log(totalCategoryRows+" "+categoryClass);
                 tableHTML += `<td class="category-header ${categoryClass}" rowspan="${totalCategoryRows}">${category}</td>`;
               }
               
@@ -874,7 +1031,7 @@
               }
               
               tableHTML += `<td class="indicator-cell ${categoryClass}">${indicatorData.indicator}</td>`;
-              tableHTML += `<td class="response-${indicatorData.response ? 'true' : 'false'}">${indicatorData.response ? 'True' : 'False'}</td>`;
+              tableHTML += `<td class="response-cell ${categoryClass} response-${indicatorData.response ? 'true' : 'false'}">${indicatorData.response ? 'True' : 'False'}</td>`;
               
               tableHTML += '</tr>';
               
