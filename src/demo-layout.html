@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>District ESF Demo Layout</title>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
+  
+  <style>
+    * {
+      font-family: sans-serif;
+    }
+    
+    body {
+      margin: 0;
+      padding: 20px;
+      background-color: #f8f9fa;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .navigation {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .nav-btn {
+      padding: 12px 24px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background-color 0.2s;
+    }
+    
+    .nav-btn:hover {
+      background: #0056b3;
+    }
+    
+    .nav-btn.active {
+      background: #28a745;
+    }
+    
+    .chart-container {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+      padding: 20px;
+    }
+    
+    .chart-title {
+      font-size: 1.5em;
+      font-weight: bold;
+      margin-bottom: 15px;
+      color: #333;
+    }
+    
+    .chart-description {
+      color: #666;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    
+    .chart-wrapper {
+      height: 500px;
+      margin-bottom: 20px;
+    }
+    
+    .chart-controls {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+      align-items: center;
+    }
+    
+    .control-btn {
+      padding: 8px 16px;
+      background: #6c757d;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.2s;
+    }
+    
+    .control-btn:hover {
+      background: #545b62;
+    }
+    
+    .control-btn.active {
+      background: #28a745;
+    }
+    
+    .toggle-btn {
+      padding: 8px 16px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.2s;
+    }
+    
+    .toggle-btn:hover {
+      background: #0056b3;
+    }
+    
+    .toggle-btn.active {
+      background: #28a745;
+    }
+    
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+    }
+    
+    .modal-content {
+      background-color: white;
+      margin: 5% auto;
+      padding: 20px;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 1200px;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #eee;
+    }
+    
+    .modal-title {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #333;
+    }
+    
+    .close-btn {
+      background: #dc3545;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    
+    .close-btn:hover {
+      background: #c82333;
+    }
+    
+    .school-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    
+    .school-table th,
+    .school-table td {
+      border: 1px solid #ddd;
+      padding: 8px 12px;
+      text-align: left;
+    }
+    
+    .school-table th {
+      background-color: #f8f9fa;
+      font-weight: bold;
+      color: #333;
+    }
+    
+    .school-table tr:nth-child(even) {
+      background-color: #f8f9fa;
+    }
+    
+    .school-table tr:hover {
+      background-color: #e9ecef;
+    }
+    
+    .response-true {
+      color: #28a745;
+      font-weight: bold;
+    }
+    
+    .response-false {
+      color: #dc3545;
+      font-weight: bold;
+    }
+    
+    .category-header {
+      color: white !important;
+      font-weight: bold;
+    }
+    
+    .category-header.conditions {
+      background-color: #007bff !important;
+    }
+    
+    .category-header.instruction {
+      background-color: #28a745 !important;
+    }
+    
+    .category-header.support {
+      background-color: #fd7e14 !important;
+    }
+    
+    .gq-header {
+      color: white !important;
+      font-weight: bold;
+    }
+    
+    .gq-header.conditions {
+      background-color: #4da6ff !important;
+    }
+    
+    .gq-header.instruction {
+      background-color: #5cb85c !important;
+    }
+    
+    .gq-header.support {
+      background-color: #ffa366 !important;
+    }
+    
+    .indicator-cell.conditions {
+      background-color: #b3d9ff !important;
+    }
+    
+    .indicator-cell.instruction {
+      background-color: #b8e6b8 !important;
+    }
+    
+    .indicator-cell.support {
+      background-color: #ffd9b3 !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <h1>District ESF Demo Layout</h1>
+    <p>Visualizations of school performance data</p>
+  </div>
+  
+  <div class="navigation">
+    <a href="index.html" class="nav-btn">📊 Treemap View</a>
+    <a href="bar-charts.html" class="nav-btn">📈 Bar Charts</a>
+    <a href="alternate-treemap.html" class="nav-btn">🌳 Alternate Treemap</a>
+    <a href="demo-layout.html" class="nav-btn active">🎯 Demo Layout</a>
+  </div>
+  
+  <!-- Chart 1: Performance by Guiding Question (Grouped) -->
+  <div class="chart-container">
+    <div class="chart-title">Performance by Guiding Question</div>
+    <div class="chart-description">
+      Shows the success rate for each guiding question grouped by category, with district average overlay.
+    </div>
+    <div class="chart-controls">
+      <button id="toggleAverage1" class="toggle-btn" onclick="toggleAverage(1)">Show District Average</button>
+    </div>
+    <div id="guidingQuestionGroupedChart" class="chart-wrapper"></div>
+  </div>
+  
+  <!-- Chart 2: Individual Indicator Performance -->
+  <div class="chart-container">
+    <div class="chart-title">Individual Indicator Performance</div>
+    <div class="chart-description">
+      Shows the success rate for each individual indicator across all schools, with district average overlay.
+    </div>
+    <div class="chart-controls">
+      <button id="toggleAverage2" class="toggle-btn" onclick="toggleAverage(2)">Show District Average</button>
+    </div>
+    <div id="indicatorChart" class="chart-wrapper"></div>
+  </div>
+  
+  <!-- Chart 3: School Performance Comparison -->
+  <div class="chart-container">
+    <div class="chart-title">School Performance Comparison</div>
+    <div class="chart-description">
+      Compares the overall performance of each school across all indicators.
+    </div>
+    <div id="schoolChart" class="chart-wrapper"></div>
+  </div>
+  
+  <!-- School Detail Modal -->
+  <div id="schoolModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title" id="modalTitle">School Details</div>
+        <button class="close-btn" onclick="closeSchoolModal()">× Close</button>
+      </div>
+      <div id="modalBody">
+        <!-- Table will be inserted here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Indicator Detail Modal -->
+  <div id="indicatorModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title" id="indicatorModalTitle">Indicator Details</div>
+        <button class="close-btn" onclick="closeIndicatorModal()">× Close</button>
+      </div>
+      <div id="indicatorModalBody">
+        <!-- Table will be inserted here -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let chartData;
+    let charts = {};
+    let districtAverage = 0;
+    
+    // Load and process data
+    async function loadData() {
+      try {
+        const response = await fetch('reorganized_school_data.json');
+        chartData = await response.json();
+        processData();
+        createCharts();
+      } catch (error) {
+        console.error('Error loading data:', error);
+      }
+    }
+    
+    function processData() {
+      // Process data for different chart types
+      window.processedData = {
+        categories: {},
+        guidingQuestions: {},
+        schools: {},
+        indicators: {}
+      };
+      
+      const schools = new Set();
+      const indicators = new Set();
+      let totalResponses = 0;
+      let totalTrueResponses = 0;
+      
+      // Process each guiding question
+      Object.entries(chartData).forEach(([gqName, gqData]) => {
+        const category = gqData.category;
+        const categoryKey = category || 'Other';
+        
+        // Initialize category data
+        if (!window.processedData.categories[categoryKey]) {
+          window.processedData.categories[categoryKey] = { total: 0, true: 0 };
+        }
+        
+        // Initialize guiding question data
+        window.processedData.guidingQuestions[gqName] = { total: 0, true: 0, category };
+        
+        // Process indicators within this guiding question
+        Object.entries(gqData).forEach(([indicatorName, schoolResponses]) => {
+          if (indicatorName !== 'category' && typeof schoolResponses === 'object') {
+            indicators.add(indicatorName);
+            
+            // Initialize indicator data
+            if (!window.processedData.indicators[indicatorName]) {
+              window.processedData.indicators[indicatorName] = { total: 0, true: 0 };
+            }
+            
+            // Process school responses
+            Object.entries(schoolResponses).forEach(([schoolName, response]) => {
+              schools.add(schoolName);
+              
+              // Initialize school data
+              if (!window.processedData.schools[schoolName]) {
+                window.processedData.schools[schoolName] = { total: 0, true: 0 };
+              }
+              
+              // Count responses
+              window.processedData.schools[schoolName].total++;
+              window.processedData.indicators[indicatorName].total++;
+              window.processedData.guidingQuestions[gqName].total++;
+              window.processedData.categories[categoryKey].total++;
+              
+              totalResponses++;
+              
+              if (response === true) {
+                window.processedData.schools[schoolName].true++;
+                window.processedData.indicators[indicatorName].true++;
+                window.processedData.guidingQuestions[gqName].true++;
+                window.processedData.categories[categoryKey].true++;
+                totalTrueResponses++;
+              }
+            });
+          }
+        });
+      });
+      
+      // Calculate district average
+      districtAverage = totalResponses > 0 ? Math.round((totalTrueResponses / totalResponses) * 100) : 0;
+    }
+    
+    function createCharts() {
+      createGuidingQuestionGroupedChart();
+      createIndicatorChart();
+      createSchoolChart();
+    }
+    
+    function createGuidingQuestionGroupedChart() {
+      // Group guiding questions by their actual category
+      const groupedByCategory = {};
+      Object.entries(window.processedData.guidingQuestions).forEach(([gq, data]) => {
+        const category = data.category || 'Other';
+        if (!groupedByCategory[category]) {
+          groupedByCategory[category] = [];
+        }
+        groupedByCategory[category].push({
+          name: gq,
+          y: data.total > 0 ? Math.round((data.true / data.total) * 100) : 0,
+          total: data.total,
+          true: data.true,
+          category: data.category
+        });
+      });
+      
+      // Sort within each category by success rate
+      const categoryOrder = ['Conditions', 'Instruction', 'Support'];
+      const categories = [];
+      const series = [];
+      
+      categoryOrder.forEach(category => {
+        if (groupedByCategory[category]) {
+          groupedByCategory[category].sort((a, b) => b.y - a.y);
+          categories.push(category);
+          
+          // Create series for this category
+          const categoryData = groupedByCategory[category].map(gq => ({
+            name: gq.name,
+            y: gq.y,
+            total: gq.total,
+            true: gq.true,
+            category: gq.category
+          }));
+          
+          series.push({
+            name: category,
+            data: categoryData,
+            color: getCategoryColor(category)
+          });
+        }
+      });
+      
+      // Add district average line
+      const averageSeries = {
+        name: 'District Average',
+        type: 'line',
+        data: categories.map(() => districtAverage),
+        color: '#dc3545',
+        lineWidth: 3,
+        marker: {
+          enabled: true,
+          radius: 4
+        },
+        visible: false
+      };
+      
+      charts.guidingQuestionGrouped = Highcharts.chart('guidingQuestionGroupedChart', {
+        chart: { type: 'column' },
+        title: { text: null },
+        xAxis: { 
+          categories: categories,
+          labels: {
+            style: {
+              fontSize: '14px',
+              fontWeight: 'bold'
+            }
+          }
+        },
+        yAxis: { 
+          title: { text: 'Success Rate (%)' }, 
+          max: 100 
+        },
+        legend: { enabled: true },
+        tooltip: { 
+          formatter: function() {
+            if (this.series.type === 'line') {
+              return `<b>District Average</b><br/>Success Rate: <b>${this.y}%</b>`;
+            } else {
+              return `<b>${this.point.name}</b><br/>Category: ${this.series.name}<br/>Success Rate: <b>${this.y}%</b>`;
+            }
+          }
+        },
+        plotOptions: { 
+          column: { 
+            grouping: true,
+            groupPadding: 0.1,
+            pointPadding: 0.05
+          },
+          series: {
+            point: {
+              events: {
+                click: function() {
+                  if (this.series.type !== 'line') {
+                    showGuidingQuestionModal(this.name);
+                  }
+                }
+              }
+            }
+          }
+        },
+        series: [...series, averageSeries],
+        exporting: { 
+          enabled: true,
+          buttons: {
+            contextButton: {
+              menuItems: ['downloadPNG', 'downloadJPEG', 'downloadPDF', 'downloadSVG', 'downloadCSV', 'downloadXLS'],
+              x: -10,
+              y: 10,
+              align: 'right',
+              verticalAlign: 'top'
+            }
+          }
+        }
+      });
+    }
+    
+    function createIndicatorChart() {
+      // Group indicators by their guiding question and category
+      const groupedIndicators = {};
+      
+      Object.entries(chartData).forEach(([gqName, gqData]) => {
+        const category = gqData.category;
+        
+        Object.entries(gqData).forEach(([indicatorName, schoolResponses]) => {
+          if (indicatorName !== 'category' && typeof schoolResponses === 'object') {
+            if (!groupedIndicators[category]) {
+              groupedIndicators[category] = {};
+            }
+            if (!groupedIndicators[category][gqName]) {
+              groupedIndicators[category][gqName] = [];
+            }
+            
+            const data = window.processedData.indicators[indicatorName];
+            groupedIndicators[category][gqName].push({
+              name: indicatorName,
+              y: data.total > 0 ? Math.round((data.true / data.total) * 100) : 0,
+              total: data.total,
+              true: data.true,
+              category: category,
+              guidingQuestion: gqName
+            });
+          }
+        });
+      });
+      
+      // Flatten and sort by category, then guiding question, then success rate
+      const categoryOrder = ['Conditions', 'Instruction', 'Support'];
+      const indicatorData = [];
+      
+      categoryOrder.forEach(category => {
+        if (groupedIndicators[category]) {
+          Object.keys(groupedIndicators[category]).forEach(gqName => {
+            groupedIndicators[category][gqName].sort((a, b) => b.y - a.y);
+            indicatorData.push(...groupedIndicators[category][gqName]);
+          });
+        }
+      });
+      
+      // Define category colors
+      const categoryColors = {
+        'Conditions': '#007bff',
+        'Instruction': '#28a745',
+        'Support': '#fd7e14'
+      };
+      
+      // Apply colors based on category
+      indicatorData.forEach(item => {
+        item.color = categoryColors[item.category] || '#6c757d';
+      });
+      
+      // Create district average line
+      const averageData = indicatorData.map(() => districtAverage);
+      
+      charts.indicator = Highcharts.chart('indicatorChart', {
+        chart: { type: 'column' },
+        title: { text: null },
+        xAxis: { type: 'category' },
+        yAxis: { title: { text: 'Success Rate (%)' }, max: 100 },
+        legend: { enabled: true },
+        tooltip: { 
+          formatter: function() {
+            if (this.series.type === 'line') {
+              return `<b>District Average</b><br/>Success Rate: <b>${this.y}%</b>`;
+            } else {
+              return `<b>${this.point.name}</b><br/>Category: ${this.point.category}<br/>Guiding Question: ${this.point.guidingQuestion}<br/>Success Rate: <b>${this.point.y}%</b>`;
+            }
+          }
+        },
+        plotOptions: { 
+          column: { colorByPoint: false },
+          series: {
+            point: {
+              events: {
+                click: function() {
+                  if (this.series.type !== 'line') {
+                    showIndicatorModal(this.name, this.category);
+                  }
+                }
+              }
+            }
+          }
+        },
+        series: [
+          {
+            name: 'Success Rate',
+            data: indicatorData
+          },
+          {
+            name: 'District Average',
+            type: 'line',
+            data: averageData,
+            color: '#dc3545',
+            lineWidth: 3,
+            marker: {
+              enabled: true,
+              radius: 4
+            },
+            visible: false
+          }
+        ],
+        exporting: { 
+          enabled: true,
+          buttons: {
+            contextButton: {
+              menuItems: ['downloadPNG', 'downloadJPEG', 'downloadPDF', 'downloadSVG', 'downloadCSV', 'downloadXLS'],
+              x: -10,
+              y: 10,
+              align: 'right',
+              verticalAlign: 'top'
+            }
+          }
+        }
+      });
+    }
+    
+    function createSchoolChart() {
+      const schoolData = Object.entries(window.processedData.schools)
+        .map(([school, data]) => ({
+          name: school,
+          y: data.total > 0 ? Math.round((data.true / data.total) * 100) : 0,
+          total: data.total,
+          true: data.true
+        }))
+        .sort((a, b) => b.y - a.y);
+      
+      // Use a consistent color palette for schools
+      const schoolColors = ['#007bff', '#28a745', '#fd7e14', '#6f42c1', '#dc3545', '#ffc107', '#20c997', '#e83e8c', '#6c757d', '#17a2b8'];
+      
+      schoolData.forEach((item, index) => {
+        item.color = schoolColors[index % schoolColors.length];
+      });
+      
+      charts.school = Highcharts.chart('schoolChart', {
+        chart: { type: 'column' },
+        title: { text: null },
+        xAxis: { type: 'category' },
+        yAxis: { title: { text: 'Success Rate (%)' }, max: 100 },
+        legend: { enabled: false },
+        tooltip: { formatter: function() { return `<b>${this.point.name}</b><br/>Success Rate: <b>${this.point.y}%</b><br/>Click to view all responses`; } },
+        plotOptions: { 
+          column: { 
+            colorByPoint: false,
+            cursor: 'pointer'
+          },
+          series: {
+            point: {
+              events: {
+                click: function() {
+                  showSchoolModal(this.name);
+                }
+              }
+            }
+          }
+        },
+        series: [{ name: 'Success Rate', data: schoolData }],
+        exporting: { 
+          enabled: true,
+          buttons: {
+            contextButton: {
+              menuItems: ['downloadPNG', 'downloadJPEG', 'downloadPDF', 'downloadSVG', 'downloadCSV', 'downloadXLS'],
+              x: -10,
+              y: 10,
+              align: 'right',
+              verticalAlign: 'top'
+            }
+          }
+        }
+      });
+    }
+    
+    function getCategoryColor(category) {
+      switch (category) {
+        case 'Conditions': return '#007bff';
+        case 'Instruction': return '#28a745';
+        case 'Support': return '#fd7e14';
+        default: return '#6c757d';
+      }
+    }
+    
+    function getSuccessRateColor(successRate) {
+      // Create a subtle color scale from red (low) to green (high)
+      if (successRate >= 80) {
+        return '#d4edda'; // Light green for high success rates
+      } else if (successRate >= 60) {
+        return '#fff3cd'; // Light yellow for medium success rates
+      } else if (successRate >= 40) {
+        return '#f8d7da'; // Light red for low-medium success rates
+      } else {
+        return '#f5c6cb'; // Darker red for very low success rates
+      }
+    }
+    
+    function toggleAverage(chartId) {
+      const button = document.getElementById(`toggleAverage${chartId}`);
+      const chart = chartId === 1 ? charts.guidingQuestionGrouped : charts.indicator;
+      
+      if (chart) {
+        const averageSeries = chart.series.find(s => s.name === 'District Average');
+        if (averageSeries) {
+          const isVisible = averageSeries.visible;
+          averageSeries.setVisible(!isVisible);
+          button.classList.toggle('active', !isVisible);
+          button.textContent = !isVisible ? 'Hide District Average' : 'Show District Average';
+        }
+      }
+    }
+    
+    // Modal functions
+    function showSchoolModal(schoolName) {
+      const modal = document.getElementById('schoolModal');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalBody = document.getElementById('modalBody');
+      
+      modalTitle.textContent = `${schoolName} - All Responses`;
+      
+      const tableHTML = generateSchoolTable(schoolName);
+      modalBody.innerHTML = tableHTML;
+      
+      modal.style.display = 'block';
+    }
+    
+    function closeSchoolModal() {
+      const modal = document.getElementById('schoolModal');
+      modal.style.display = 'none';
+    }
+    
+    function showIndicatorModal(indicatorName, category) {
+      const modal = document.getElementById('indicatorModal');
+      const modalTitle = document.getElementById('indicatorModalTitle');
+      const modalBody = document.getElementById('indicatorModalBody');
+      
+      modalTitle.textContent = `${indicatorName} - School Responses`;
+      
+      const tableHTML = generateIndicatorTable(indicatorName, category);
+      modalBody.innerHTML = tableHTML;
+      
+      modal.style.display = 'block';
+    }
+    
+    function showGuidingQuestionModal(gqName) {
+      const modal = document.getElementById('indicatorModal');
+      const modalTitle = document.getElementById('indicatorModalTitle');
+      const modalBody = document.getElementById('indicatorModalBody');
+      
+      modalTitle.textContent = `${gqName} - All Indicators`;
+      
+      const tableHTML = generateGuidingQuestionTable(gqName);
+      modalBody.innerHTML = tableHTML;
+      
+      modal.style.display = 'block';
+    }
+    
+    function closeIndicatorModal() {
+      const modal = document.getElementById('indicatorModal');
+      modal.style.display = 'none';
+    }
+    
+    function generateSchoolTable(schoolName) {
+      let tableHTML = `
+        <table class="school-table">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Guiding Question</th>
+              <th>Indicator</th>
+              <th>Response</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+      
+      const organizedData = {};
+      
+      Object.entries(chartData).forEach(([gqName, gqData]) => {
+        const category = gqData.category;
+        
+        if (!organizedData[category]) {
+          organizedData[category] = {};
+        }
+        
+        if (!organizedData[category][gqName]) {
+          organizedData[category][gqName] = [];
+        }
+        
+        Object.entries(gqData).forEach(([indicatorName, schoolResponses]) => {
+          if (indicatorName !== 'category' && typeof schoolResponses === 'object') {
+            const response = schoolResponses[schoolName];
+            if (response !== undefined) {
+              organizedData[category][gqName].push({
+                indicator: indicatorName,
+                response: response
+              });
+            }
+          }
+        });
+      });
+      
+      const categoryOrder = ['Conditions', 'Instruction', 'Support'];
+      let rowCount = 0;
+      
+      categoryOrder.forEach(category => {
+        if (organizedData[category]) {
+          const gqNames = Object.keys(organizedData[category]);
+          let categoryRowCount = 0;
+          
+          gqNames.forEach(gqName => {
+            const indicators = organizedData[category][gqName];
+            
+            indicators.forEach((indicatorData, index) => {
+              const isFirstCategoryRow = categoryRowCount === 0;
+              const isFirstGQRow = index === 0;
+              const isEvenRow = rowCount % 2 === 0;
+              
+              // Determine category class name (lowercase)
+              const categoryClass = category.toLowerCase();
+              
+              tableHTML += '<tr>';
+              
+              if (isFirstCategoryRow) {
+                const totalCategoryRows = getCategoryRowspan(organizedData[category]);
+                tableHTML += `<td class="category-header ${categoryClass}" rowspan="${totalCategoryRows}">${category}</td>`;
+              }
+              
+              if (isFirstGQRow) {
+                tableHTML += `<td class="gq-header ${categoryClass}" rowspan="${indicators.length}">${gqName}</td>`;
+              }
+              
+              tableHTML += `<td class="indicator-cell ${categoryClass}">${indicatorData.indicator}</td>`;
+              tableHTML += `<td class="response-${indicatorData.response ? 'true' : 'false'}">${indicatorData.response ? 'True' : 'False'}</td>`;
+              
+              tableHTML += '</tr>';
+              
+              categoryRowCount++;
+              rowCount++;
+            });
+          });
+        }
+      });
+      
+      tableHTML += `
+          </tbody>
+        </table>
+      `;
+      
+      return tableHTML;
+    }
+    
+    function generateIndicatorTable(indicatorName, category) {
+      // Find the guiding question for this indicator
+      let gqName = '';
+      let schoolData = {};
+      
+      // Search through all guiding questions
+      Object.entries(chartData).forEach(([gq, gqData]) => {
+        // Check if this GQ belongs to the specified category
+        if (gqData.category === category) {
+          // Look for the indicator in this GQ
+          Object.entries(gqData).forEach(([indicator, data]) => {
+            if (indicator === indicatorName && typeof data === 'object') {
+              gqName = gq;
+              schoolData = data;
+            }
+          });
+        }
+      });
+      
+      // If we still don't have data, try a broader search
+      if (Object.keys(schoolData).length === 0) {
+        Object.entries(chartData).forEach(([gq, gqData]) => {
+          Object.entries(gqData).forEach(([indicator, data]) => {
+            if (indicator === indicatorName && typeof data === 'object') {
+              gqName = gq;
+              schoolData = data;
+            }
+          });
+        });
+      }
+      
+      let tableHTML = '<table class="school-table">';
+      tableHTML += '<thead><tr><th>School</th><th>Response</th></tr></thead><tbody>';
+      
+      if (Object.keys(schoolData).length === 0) {
+        tableHTML += '<tr><td colspan="2">No data found for this indicator</td></tr>';
+      } else {
+        for (const [school, response] of Object.entries(schoolData)) {
+          tableHTML += '<tr>';
+          tableHTML += `<td>${school}</td>`;
+          tableHTML += `<td class="response-${response ? 'true' : 'false'}">${response ? 'True' : 'False'}</td>`;
+          tableHTML += '</tr>';
+        }
+      }
+      
+      tableHTML += '</tbody></table>';
+      return tableHTML;
+    }
+    
+    function generateGuidingQuestionTable(gqName) {
+      const gqData = chartData[gqName];
+      if (!gqData) {
+        return '<p>No data available for this guiding question</p>';
+      }
+      
+      let tableHTML = '<table class="school-table">';
+      tableHTML += '<thead><tr><th>Indicator</th><th>Success Rate</th></tr></thead><tbody>';
+      
+      // Get all indicators for this guiding question
+      Object.entries(gqData).forEach(([indicatorName, schoolData]) => {
+        if (indicatorName !== 'category' && typeof schoolData === 'object') {
+          // Calculate success rate for this indicator
+          let trueCount = 0;
+          let totalCount = 0;
+          
+          for (const response of Object.values(schoolData)) {
+            totalCount++;
+            if (response === true) {
+              trueCount++;
+            }
+          }
+          
+          const successRate = totalCount > 0 ? Math.round((trueCount / totalCount) * 100) : 0;
+          
+          // Generate background color based on success rate
+          const backgroundColor = getSuccessRateColor(successRate);
+          
+          tableHTML += `<tr style="background-color: ${backgroundColor};">`;
+          tableHTML += `<td>${indicatorName}</td>`;
+          tableHTML += `<td>${successRate}%</td>`;
+          tableHTML += '</tr>';
+        }
+      });
+      
+      tableHTML += '</tbody></table>';
+      return tableHTML;
+    }
+    
+    function getCategoryRowspan(categoryData) {
+      let totalRows = 0;
+      Object.values(categoryData).forEach(indicators => {
+        totalRows += indicators.length;
+      });
+      return totalRows;
+    }
+    
+    // Close modals when clicking outside
+    window.onclick = function(event) {
+      const schoolModal = document.getElementById('schoolModal');
+      const indicatorModal = document.getElementById('indicatorModal');
+      
+      if (event.target === schoolModal) {
+        closeSchoolModal();
+      }
+      if (event.target === indicatorModal) {
+        closeIndicatorModal();
+      }
+    }
+    
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', loadData);
+  </script>
+</body>
+</html> 
