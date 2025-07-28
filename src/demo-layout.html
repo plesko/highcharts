@@ -281,6 +281,11 @@
     .school-table .response-cell.support {
       background-color: #ffe5cc !important;
     }
+
+    .highcharts-container, .highcharts-container svg {
+      overflow: visible !important;
+    }
+    
   </style>
 </head>
 
@@ -463,14 +468,10 @@
     }
     
     function createGuidingQuestionGroupedChart() {
-      // Group guiding questions by their actual category
-      const groupedByCategory = {};
+      // Create a single series with all guiding questions
+      const allGuidingQuestions = [];
       Object.entries(window.processedData.guidingQuestions).forEach(([gq, data]) => {
-        const category = data.category || 'Other';
-        if (!groupedByCategory[category]) {
-          groupedByCategory[category] = [];
-        }
-        groupedByCategory[category].push({
+        allGuidingQuestions.push({
           name: gq,
           y: data.total > 0 ? Math.round((data.true / data.total) * 100) : 0,
           total: data.total,
@@ -479,32 +480,32 @@
         });
       });
       
-      // Sort within each category by success rate
+      // Sort by category first, then by success rate within each category
       const categoryOrder = ['Conditions', 'Instruction', 'Support'];
-      const categories = [];
-      const series = [];
-      
-      categoryOrder.forEach(category => {
-        if (groupedByCategory[category]) {
-          groupedByCategory[category].sort((a, b) => b.y - a.y);
-          categories.push(category);
-          
-          // Create series for this category
-          const categoryData = groupedByCategory[category].map(gq => ({
-            name: gq.name,
-            y: gq.y,
-            total: gq.total,
-            true: gq.true,
-            category: gq.category
-          }));
-          
-          series.push({
-            name: category,
-            data: categoryData,
-            color: getCategoryColor(category)
-          });
+      allGuidingQuestions.sort((a, b) => {
+        const aIndex = categoryOrder.indexOf(a.category);
+        const bIndex = categoryOrder.indexOf(b.category);
+        if (aIndex !== bIndex) {
+          return aIndex - bIndex;
         }
+        return b.y - a.y; // Sort by success rate within category
       });
+      
+      // Create categories array for x-axis labels
+      const categories = allGuidingQuestions.map(gq => gq.name);
+      
+      // Create single series with all data
+      const series = [{
+        name: 'Guiding Questions',
+        data: allGuidingQuestions.map(gq => ({
+          name: gq.name,
+          y: gq.y,
+          total: gq.total,
+          true: gq.true,
+          category: gq.category,
+          color: getCategoryColor(gq.category)
+        }))
+      }];
       
       // Add district average line
       const averageSeries = {
@@ -523,6 +524,7 @@
       charts.guidingQuestionGrouped = Highcharts.chart('guidingQuestionGroupedChart', {
         chart: { type: 'column' },
         title: { text: null },
+        accessibility: { enabled: false },
         xAxis: { 
           categories: categories,
           labels: {
@@ -548,9 +550,8 @@
         },
         plotOptions: { 
           column: { 
-            grouping: true,
-            groupPadding: 0.1,
-            pointPadding: 0.05
+            grouping: false,
+            pointPadding: 0.1
           },
           series: {
             point: {
@@ -571,7 +572,7 @@
             contextButton: {
               menuItems: ['downloadPNG', 'downloadJPEG', 'downloadPDF', 'downloadSVG', 'downloadCSV', 'downloadXLS'],
               x: -10,
-              y: 10,
+              y: -40,
               align: 'right',
               verticalAlign: 'top'
             }
@@ -640,6 +641,7 @@
       charts.indicator = Highcharts.chart('indicatorChart', {
         chart: { type: 'column' },
         title: { text: null },
+        accessibility: { enabled: false },
         xAxis: { type: 'category' },
         yAxis: { title: { text: 'Success Rate (%)' }, max: 100 },
         legend: { enabled: true },
@@ -690,7 +692,7 @@
             contextButton: {
               menuItems: ['downloadPNG', 'downloadJPEG', 'downloadPDF', 'downloadSVG', 'downloadCSV', 'downloadXLS'],
               x: -10,
-              y: 10,
+              y: -40,
               align: 'right',
               verticalAlign: 'top'
             }
@@ -707,7 +709,7 @@
           total: data.total,
           true: data.true
         }))
-        .sort((a, b) => b.y - a.y);
+        .sort((a, b) => a.name.localeCompare(b.name));
       
       // Use a consistent color palette for schools
       const schoolColors = ['#007bff', '#28a745', '#fd7e14', '#6f42c1', '#dc3545', '#ffc107', '#20c997', '#e83e8c', '#6c757d', '#17a2b8'];
@@ -719,6 +721,7 @@
       charts.school = Highcharts.chart('schoolChart', {
         chart: { type: 'column' },
         title: { text: null },
+        accessibility: { enabled: false },
         xAxis: { type: 'category' },
         yAxis: { title: { text: 'Success Rate (%)' }, max: 100 },
         legend: { enabled: false },
@@ -745,7 +748,7 @@
             contextButton: {
               menuItems: ['downloadPNG', 'downloadJPEG', 'downloadPDF', 'downloadSVG', 'downloadCSV', 'downloadXLS'],
               x: -10,
-              y: 10,
+              y: -40,
               align: 'right',
               verticalAlign: 'top'
             }
@@ -817,6 +820,7 @@
       charts.categoryBySchool = Highcharts.chart('categoryBySchoolChart', {
         chart: { type: 'column' },
         title: { text: null },
+        accessibility: { enabled: false },
         xAxis: { 
           type: 'category',
           labels: { style: { fontSize: '12px' } }
@@ -856,7 +860,7 @@
             contextButton: {
               menuItems: ['downloadPNG', 'downloadJPEG', 'downloadPDF', 'downloadSVG', 'downloadCSV', 'downloadXLS'],
               x: -10,
-              y: 10,
+              y: -40,
               align: 'right',
               verticalAlign: 'top'
             }
@@ -1022,7 +1026,6 @@
               tableHTML += '<tr>';
               if (isFirstCategoryRow) {
                 const totalCategoryRows = getCategoryRowspan(organizedData[category]);
-                console.log(totalCategoryRows+" "+categoryClass);
                 tableHTML += `<td class="category-header ${categoryClass}" rowspan="${totalCategoryRows}">${category}</td>`;
               }
               
