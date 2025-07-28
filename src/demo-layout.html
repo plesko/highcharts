@@ -122,6 +122,27 @@
       background: #28a745;
     }
     
+    .chart-controls select {
+      padding: 8px 12px;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      font-size: 14px;
+      background-color: white;
+      cursor: pointer;
+    }
+    
+    .chart-controls select:focus {
+      outline: none;
+      border-color: #007bff;
+      box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+    }
+    
+    .chart-controls label {
+      font-weight: 500;
+      color: #333;
+      margin-right: 8px;
+    }
+    
     /* Modal styles */
     .modal {
       display: none;
@@ -314,6 +335,24 @@
     <div id="guidingQuestionGroupedChart" class="chart-wrapper"></div>
   </div>
   
+  <!-- Chart 1: School Performance by Guiding Question -->
+  <div class="chart-container">
+    <div class="chart-title">School Performance by Guiding Question</div>
+    <div class="chart-description">
+      Shows the success rate for each school grouped by guiding question within a selected category.
+    </div>
+    <div class="chart-controls">
+      <label for="categorySelect">Select Category:</label>
+      <select id="categorySelect" onchange="updateSchoolByGuidingQuestionChart()">
+        <option value="Conditions">Conditions</option>
+        <option value="Instruction">Instruction</option>
+        <option value="Support">Support</option>
+      </select>
+      <button id="toggleAverage2" class="toggle-btn" onclick="toggleAverage(2)">Show District Average</button>
+    </div>
+    <div id="schoolByGuidingQuestionChart" class="chart-wrapper"></div>
+  </div>
+  
   <!-- Chart 2: Individual Indicator Performance -->
   <div class="chart-container">
     <div class="chart-title">Individual Indicator Performance</div>
@@ -321,12 +360,12 @@
       Shows the success rate for each individual indicator across all schools, with district average overlay.
     </div>
     <div class="chart-controls">
-      <button id="toggleAverage2" class="toggle-btn" onclick="toggleAverage(2)">Show District Average</button>
+      <button id="toggleAverage3" class="toggle-btn" onclick="toggleAverage(3)">Show District Average</button>
     </div>
     <div id="indicatorChart" class="chart-wrapper"></div>
   </div>
   
-  <!-- Chart 3: School Performance Comparison -->
+  <!-- Chart 4: School Performance Comparison -->
   <div class="chart-container">
     <div class="chart-title">School Performance Comparison</div>
     <div class="chart-description">
@@ -335,14 +374,15 @@
     <div id="schoolChart" class="chart-wrapper"></div>
   </div>
   
-  <!-- Chart 4: Category Performance by School -->
+  
+  <!-- Chart 5: Category Performance by School -->
   <div class="chart-container">
     <div class="chart-title">Category Performance by School</div>
     <div class="chart-description">
       Shows the success rate for each category (Conditions, Instruction, Support) grouped by school, with district average overlay.
     </div>
     <div class="chart-controls">
-      <button id="toggleAverage4" class="toggle-btn" onclick="toggleAverage(4)">Show District Average</button>
+      <button id="toggleAverage5" class="toggle-btn" onclick="toggleAverage(5)">Show District Average</button>
     </div>
     <div id="categoryBySchoolChart" class="chart-wrapper"></div>
   </div>
@@ -462,6 +502,7 @@
     
     function createCharts() {
       createGuidingQuestionGroupedChart();
+      createSchoolByGuidingQuestionChart();
       createIndicatorChart();
       createSchoolChart();
       createCategoryBySchoolChart();
@@ -559,6 +600,162 @@
                 click: function() {
                   if (this.series.type !== 'line') {
                     showGuidingQuestionModal(this.name);
+                  }
+                }
+              }
+            }
+          }
+        },
+        series: [...series, averageSeries],
+        exporting: { 
+          enabled: true,
+          buttons: {
+            contextButton: {
+              menuItems: ['downloadPNG', 'downloadJPEG', 'downloadPDF', 'downloadSVG', 'downloadCSV', 'downloadXLS'],
+              x: -10,
+              y: -40,
+              align: 'right',
+              verticalAlign: 'top'
+            }
+          }
+        }
+      });
+    }
+    
+    function createSchoolByGuidingQuestionChart() {
+      const selectedCategory = document.getElementById('categorySelect').value;
+      updateSchoolByGuidingQuestionChart(selectedCategory);
+    }
+    
+    function updateSchoolByGuidingQuestionChart(category = null) {
+      if (!category) {
+        category = document.getElementById('categorySelect').value;
+      }
+      
+      // Get all schools
+      const schools = new Set();
+      Object.entries(chartData).forEach(([gqName, gqData]) => {
+        if (gqData.category === category) {
+          Object.entries(gqData).forEach(([indicatorName, schoolResponses]) => {
+            if (indicatorName !== 'category' && typeof schoolResponses === 'object') {
+              Object.keys(schoolResponses).forEach(school => schools.add(school));
+            }
+          });
+        }
+      });
+      
+      const schoolList = Array.from(schools).sort();
+      
+      // Get guiding questions for the selected category
+      const guidingQuestions = [];
+      Object.entries(chartData).forEach(([gqName, gqData]) => {
+        if (gqData.category === category) {
+          guidingQuestions.push(gqName);
+        }
+      });
+      
+      // Sort guiding questions alphabetically
+      guidingQuestions.sort();
+      
+      // Calculate success rate for each school per guiding question
+      const series = schoolList.map(school => {
+        const data = guidingQuestions.map(gqName => {
+          let totalResponses = 0;
+          let trueResponses = 0;
+          
+          const gqData = chartData[gqName];
+          Object.entries(gqData).forEach(([indicatorName, schoolResponses]) => {
+            if (indicatorName !== 'category' && typeof schoolResponses === 'object' && schoolResponses[school] !== undefined) {
+              totalResponses++;
+              if (schoolResponses[school] === true) {
+                trueResponses++;
+              }
+            }
+          });
+          
+          return {
+            name: gqName,
+            y: totalResponses > 0 ? Math.round((trueResponses / totalResponses) * 100) : 0,
+            total: totalResponses,
+            true: trueResponses
+          };
+        });
+        
+        return {
+          name: school,
+          data: data,
+          type: 'column'
+        };
+      });
+      
+      // Add district average line
+      const averageData = guidingQuestions.map(gqName => {
+        const gqData = window.processedData.guidingQuestions[gqName];
+        return gqData ? gqData.total > 0 ? Math.round((gqData.true / gqData.total) * 100) : 0 : 0;
+      });
+      
+      const averageSeries = {
+        name: 'District Average',
+        type: 'line',
+        data: averageData,
+        color: '#dc3545',
+        lineWidth: 3,
+        marker: {
+          enabled: true,
+          radius: 4
+        },
+        visible: false
+      };
+      
+      // Use consistent colors for schools
+      const schoolColors = ['#007bff', '#28a745', '#fd7e14', '#6f42c1', '#dc3545', '#ffc107', '#20c997', '#e83e8c', '#6c757d', '#17a2b8'];
+      series.forEach((schoolSeries, index) => {
+        schoolSeries.color = schoolColors[index % schoolColors.length];
+      });
+      
+      if (charts.schoolByGuidingQuestion) {
+        charts.schoolByGuidingQuestion.destroy();
+      }
+      
+      charts.schoolByGuidingQuestion = Highcharts.chart('schoolByGuidingQuestionChart', {
+        chart: { type: 'column' },
+        title: { text: null },
+        accessibility: { enabled: false },
+        xAxis: { 
+          type: 'category',
+          categories: guidingQuestions,
+          labels: {
+            style: {
+              fontSize: '12px'
+            }
+          }
+        },
+        yAxis: { 
+          title: { text: 'Success Rate (%)' }, 
+          max: 100 
+        },
+        legend: { enabled: true },
+        tooltip: { 
+          formatter: function() {
+            if (this.series.type === 'line') {
+              return `<b>District Average</b><br/>${this.x}<br/>Success Rate: <b>${this.y}%</b>`;
+            } else {
+              return `<b>${this.series.name}</b><br/>${this.x}<br/>Success Rate: <b>${this.y}%</b>`;
+            }
+          }
+        },
+        plotOptions: { 
+          column: { 
+            grouping: true,
+            groupPadding: 0.1,
+            pointPadding: 0.05
+          },
+          series: {
+            point: {
+              events: {
+                click: function() {
+                  if (this.series.type !== 'line') {
+                    showSchoolModal(this.series.name);
                   }
                 }
               }
@@ -898,8 +1095,10 @@
       if (chartId === 1) {
         chart = charts.guidingQuestionGrouped;
       } else if (chartId === 2) {
+        chart = charts.schoolByGuidingQuestion;
+      } else if (chartId === 3) {
         chart = charts.indicator;
-      } else if (chartId === 4) {
+      } else if (chartId === 5) {
         chart = charts.categoryBySchool;
       }
       
