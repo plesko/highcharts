@@ -360,12 +360,12 @@
       Shows the success rate for each individual indicator across all schools, with district average overlay.
     </div>
     <div class="chart-controls">
-      <button id="toggleAverage3" class="toggle-btn" onclick="toggleAverage(3)">Show District Average</button>
+      <button id="toggleAverage2" class="toggle-btn" onclick="toggleAverage(2)">Show District Average</button>
     </div>
     <div id="indicatorChart" class="chart-wrapper"></div>
   </div>
   
-  <!-- Chart 4: School Performance Comparison -->
+  <!-- Chart 3: School Performance Comparison -->
   <div class="chart-container">
     <div class="chart-title">School Performance Comparison</div>
     <div class="chart-description">
@@ -374,15 +374,14 @@
     <div id="schoolChart" class="chart-wrapper"></div>
   </div>
   
-  
-  <!-- Chart 5: Category Performance by School -->
+  <!-- Chart 4: Category Performance by School -->
   <div class="chart-container">
     <div class="chart-title">Category Performance by School</div>
     <div class="chart-description">
       Shows the success rate for each category (Conditions, Instruction, Support) grouped by school, with district average overlay.
     </div>
     <div class="chart-controls">
-      <button id="toggleAverage5" class="toggle-btn" onclick="toggleAverage(5)">Show District Average</button>
+      <button id="toggleAverage4" class="toggle-btn" onclick="toggleAverage(4)">Show District Average</button>
     </div>
     <div id="categoryBySchoolChart" class="chart-wrapper"></div>
   </div>
@@ -1095,10 +1094,8 @@
       if (chartId === 1) {
         chart = charts.guidingQuestionGrouped;
       } else if (chartId === 2) {
-        chart = charts.schoolByGuidingQuestion;
-      } else if (chartId === 3) {
         chart = charts.indicator;
-      } else if (chartId === 5) {
+      } else if (chartId === 4) {
         chart = charts.categoryBySchool;
       }
       
