@@ -24,6 +24,55 @@
       margin-bottom: 30px;
     }
     
+    .filter-controls {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: #f8f9fa;
+      padding: 15px 20px;
+      margin: 0 -20px 30px -20px;
+      border-bottom: 1px solid #dee2e6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .filter-controls > label {
+      font-weight: 500;
+      color: #333;
+    }
+    
+    .checkbox-group {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: #333;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+    }
+    
+    .checkbox-label:hover {
+      background-color: #f8f9fa;
+    }
+    
+    .checkbox-label input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+    
     .navigation {
       display: flex;
       justify-content: center;
@@ -323,15 +372,31 @@
     <a href="demo-layout.html" class="nav-btn active">🎯 Demo Layout</a>
   </div>
   
+  <div class="filter-controls">
+    <label>Filter by School Type:</label>
+    <div class="checkbox-group">
+      <label class="checkbox-label">
+        <input type="checkbox" id="elementarySchools" value="elementary" checked onchange="updateSchoolTypeFilter()">
+        Elementary Schools
+      </label>
+      <label class="checkbox-label">
+        <input type="checkbox" id="middleSchools" value="middle" checked onchange="updateSchoolTypeFilter()">
+        Middle Schools
+      </label>
+      <label class="checkbox-label">
+        <input type="checkbox" id="highSchools" value="high" checked onchange="updateSchoolTypeFilter()">
+        High Schools
+      </label>
+    </div>
+  </div>
+  
   <!-- Chart 1: Performance by Guiding Question (Grouped) -->
   <div class="chart-container">
     <div class="chart-title">Performance by Guiding Question</div>
     <div class="chart-description">
-      Shows the success rate for each guiding question grouped by category, with district average overlay.
+      Shows the success rate for each guiding question grouped by category.
     </div>
-    <div class="chart-controls">
-      <button id="toggleAverage1" class="toggle-btn" onclick="toggleAverage(1)">Show District Average</button>
-    </div>
+
     <div id="guidingQuestionGroupedChart" class="chart-wrapper"></div>
   </div>
   
@@ -348,7 +413,6 @@
         <option value="Instruction">Instruction</option>
         <option value="Support">Support</option>
       </select>
-      <button id="toggleAverage2" class="toggle-btn" onclick="toggleAverage(2)">Show District Average</button>
     </div>
     <div id="schoolByGuidingQuestionChart" class="chart-wrapper"></div>
   </div>
@@ -357,11 +421,9 @@
   <div class="chart-container">
     <div class="chart-title">Individual Indicator Performance</div>
     <div class="chart-description">
-      Shows the success rate for each individual indicator across all schools, with district average overlay.
+      Shows the success rate for each individual indicator across all schools.
     </div>
-    <div class="chart-controls">
-      <button id="toggleAverage2" class="toggle-btn" onclick="toggleAverage(2)">Show District Average</button>
-    </div>
+
     <div id="indicatorChart" class="chart-wrapper"></div>
   </div>
   
@@ -378,11 +440,9 @@
   <div class="chart-container">
     <div class="chart-title">Category Performance by School</div>
     <div class="chart-description">
-      Shows the success rate for each category (Conditions, Instruction, Support) grouped by school, with district average overlay.
+      Shows the success rate for each category (Conditions, Instruction, Support) grouped by school.
     </div>
-    <div class="chart-controls">
-      <button id="toggleAverage4" class="toggle-btn" onclick="toggleAverage(4)">Show District Average</button>
-    </div>
+
     <div id="categoryBySchoolChart" class="chart-wrapper"></div>
   </div>
   
@@ -416,6 +476,8 @@
     let chartData;
     let charts = {};
     let districtAverage = 0;
+    let selectedSchoolTypes = ['elementary', 'middle', 'high'];
+    let schoolTypeMapping = {};
     
     // Load and process data
     async function loadData() {
@@ -430,6 +492,9 @@
     }
     
     function processData() {
+      // Detect school types based on school names
+      detectSchoolTypes();
+      
       // Process data for different chart types
       window.processedData = {
         categories: {},
@@ -468,27 +533,31 @@
             
             // Process school responses
             Object.entries(schoolResponses).forEach(([schoolName, response]) => {
-              schools.add(schoolName);
-              
-              // Initialize school data
-              if (!window.processedData.schools[schoolName]) {
-                window.processedData.schools[schoolName] = { total: 0, true: 0 };
-              }
-              
-              // Count responses
-              window.processedData.schools[schoolName].total++;
-              window.processedData.indicators[indicatorName].total++;
-              window.processedData.guidingQuestions[gqName].total++;
-              window.processedData.categories[categoryKey].total++;
-              
-              totalResponses++;
-              
-              if (response === true) {
-                window.processedData.schools[schoolName].true++;
-                window.processedData.indicators[indicatorName].true++;
-                window.processedData.guidingQuestions[gqName].true++;
-                window.processedData.categories[categoryKey].true++;
-                totalTrueResponses++;
+              // Only include schools that match the current filter
+              const filteredSchools = getFilteredSchools();
+              if (filteredSchools.includes(schoolName)) {
+                schools.add(schoolName);
+                
+                // Initialize school data
+                if (!window.processedData.schools[schoolName]) {
+                  window.processedData.schools[schoolName] = { total: 0, true: 0 };
+                }
+                
+                // Count responses
+                window.processedData.schools[schoolName].total++;
+                window.processedData.indicators[indicatorName].total++;
+                window.processedData.guidingQuestions[gqName].total++;
+                window.processedData.categories[categoryKey].total++;
+                
+                totalResponses++;
+                
+                if (response === true) {
+                  window.processedData.schools[schoolName].true++;
+                  window.processedData.indicators[indicatorName].true++;
+                  window.processedData.guidingQuestions[gqName].true++;
+                  window.processedData.categories[categoryKey].true++;
+                  totalTrueResponses++;
+                }
               }
             });
           }
@@ -497,6 +566,67 @@
       
       // Calculate district average
       districtAverage = totalResponses > 0 ? Math.round((totalTrueResponses / totalResponses) * 100) : 0;
+    }
+    
+    function detectSchoolTypes() {
+      // Collect all school names
+      const allSchools = new Set();
+      Object.entries(chartData).forEach(([gqName, gqData]) => {
+        Object.entries(gqData).forEach(([indicatorName, schoolResponses]) => {
+          if (indicatorName !== 'category' && typeof schoolResponses === 'object') {
+            Object.keys(schoolResponses).forEach(school => allSchools.add(school));
+          }
+        });
+      });
+      
+      // Categorize schools based on name patterns
+      Array.from(allSchools).forEach(school => {
+        const schoolLower = school.toLowerCase();
+        if (schoolLower.includes('elementary') || schoolLower.includes('primary') || schoolLower.includes('grade') || schoolLower.includes('k-') || schoolLower.includes('k ')) {
+          schoolTypeMapping[school] = 'elementary';
+        } else if (schoolLower.includes('middle') || schoolLower.includes('junior')) {
+          schoolTypeMapping[school] = 'middle';
+        } else if (schoolLower.includes('high') || schoolLower.includes('secondary') || schoolLower.includes('senior')) {
+          schoolTypeMapping[school] = 'high';
+        } else {
+          // Default to elementary if unclear
+          schoolTypeMapping[school] = 'elementary';
+        }
+      });
+    }
+    
+    function getFilteredSchools() {
+      return Object.keys(schoolTypeMapping).filter(school => selectedSchoolTypes.includes(schoolTypeMapping[school]));
+    }
+    
+    function updateSchoolTypeFilter() {
+      // Only proceed if data is loaded
+      if (!chartData) {
+        return;
+      }
+      
+      const elementaryCheckbox = document.getElementById('elementarySchools');
+      const middleCheckbox = document.getElementById('middleSchools');
+      const highCheckbox = document.getElementById('highSchools');
+      
+      // Get all checked values
+      const checkedValues = [];
+      if (elementaryCheckbox && elementaryCheckbox.checked) checkedValues.push('elementary');
+      if (middleCheckbox && middleCheckbox.checked) checkedValues.push('middle');
+      if (highCheckbox && highCheckbox.checked) checkedValues.push('high');
+      
+      // If nothing is selected, default to all
+      if (checkedValues.length === 0) {
+        if (elementaryCheckbox) elementaryCheckbox.checked = true;
+        if (middleCheckbox) middleCheckbox.checked = true;
+        if (highCheckbox) highCheckbox.checked = true;
+        selectedSchoolTypes = ['elementary', 'middle', 'high'];
+      } else {
+        selectedSchoolTypes = checkedValues;
+      }
+      
+      processData();
+      createCharts();
     }
     
     function createCharts() {
@@ -547,19 +677,7 @@
         }))
       }];
       
-      // Add district average line
-      const averageSeries = {
-        name: 'District Average',
-        type: 'line',
-        data: categories.map(() => districtAverage),
-        color: '#dc3545',
-        lineWidth: 3,
-        marker: {
-          enabled: true,
-          radius: 4
-        },
-        visible: false
-      };
+
       
       charts.guidingQuestionGrouped = Highcharts.chart('guidingQuestionGroupedChart', {
         chart: { type: 'column' },
@@ -581,11 +699,7 @@
         legend: { enabled: true },
         tooltip: { 
           formatter: function() {
-            if (this.series.type === 'line') {
-              return `<b>District Average</b><br/>Success Rate: <b>${this.y}%</b>`;
-            } else {
-              return `<b>${this.point.name}</b><br/>Category: ${this.series.name}<br/>Success Rate: <b>${this.y}%</b>`;
-            }
+            return `<b>${this.point.name}</b><br/>Category: ${this.series.name}<br/>Success Rate: <b>${this.y}%</b>`;
           }
         },
         plotOptions: { 
@@ -597,15 +711,13 @@
             point: {
               events: {
                 click: function() {
-                  if (this.series.type !== 'line') {
-                    showGuidingQuestionModal(this.name);
-                  }
+                  showGuidingQuestionModal(this.name);
                 }
               }
             }
           }
         },
-        series: [...series, averageSeries],
+        series: series,
         exporting: { 
           enabled: true,
           buttons: {
@@ -631,19 +743,9 @@
         category = document.getElementById('categorySelect').value;
       }
       
-      // Get all schools
-      const schools = new Set();
-      Object.entries(chartData).forEach(([gqName, gqData]) => {
-        if (gqData.category === category) {
-          Object.entries(gqData).forEach(([indicatorName, schoolResponses]) => {
-            if (indicatorName !== 'category' && typeof schoolResponses === 'object') {
-              Object.keys(schoolResponses).forEach(school => schools.add(school));
-            }
-          });
-        }
-      });
-      
-      const schoolList = Array.from(schools).sort();
+      // Get filtered schools
+      const filteredSchools = getFilteredSchools();
+      const schoolList = filteredSchools.sort();
       
       // Get guiding questions for the selected category
       const guidingQuestions = [];
@@ -687,24 +789,7 @@
         };
       });
       
-      // Add district average line
-      const averageData = guidingQuestions.map(gqName => {
-        const gqData = window.processedData.guidingQuestions[gqName];
-        return gqData ? gqData.total > 0 ? Math.round((gqData.true / gqData.total) * 100) : 0 : 0;
-      });
-      
-      const averageSeries = {
-        name: 'District Average',
-        type: 'line',
-        data: averageData,
-        color: '#dc3545',
-        lineWidth: 3,
-        marker: {
-          enabled: true,
-          radius: 4
-        },
-        visible: false
-      };
+
       
       // Use consistent colors for schools
       const schoolColors = ['#007bff', '#28a745', '#fd7e14', '#6f42c1', '#dc3545', '#ffc107', '#20c997', '#e83e8c', '#6c757d', '#17a2b8'];
@@ -736,11 +821,7 @@
         legend: { enabled: true },
         tooltip: { 
           formatter: function() {
-            if (this.series.type === 'line') {
-              return `<b>District Average</b><br/>${this.x}<br/>Success Rate: <b>${this.y}%</b>`;
-            } else {
-              return `<b>${this.series.name}</b><br/>${this.x}<br/>Success Rate: <b>${this.y}%</b>`;
-            }
+            return `<b>${this.series.name}</b><br/>${this.x}<br/>Success Rate: <b>${this.y}%</b>`;
           }
         },
         plotOptions: { 
@@ -753,15 +834,13 @@
             point: {
               events: {
                 click: function() {
-                  if (this.series.type !== 'line') {
-                    showSchoolModal(this.series.name);
-                  }
+                  showSchoolModal(this.series.name);
                 }
               }
             }
           }
         },
-        series: [...series, averageSeries],
+        series: series,
         exporting: { 
           enabled: true,
           buttons: {
@@ -831,8 +910,7 @@
         item.color = categoryColors[item.category] || '#6c757d';
       });
       
-      // Create district average line
-      const averageData = indicatorData.map(() => districtAverage);
+
       
       charts.indicator = Highcharts.chart('indicatorChart', {
         chart: { type: 'column' },
@@ -843,11 +921,7 @@
         legend: { enabled: true },
         tooltip: { 
           formatter: function() {
-            if (this.series.type === 'line') {
-              return `<b>District Average</b><br/>Success Rate: <b>${this.y}%</b>`;
-            } else {
-              return `<b>${this.point.name}</b><br/>Category: ${this.point.category}<br/>Guiding Question: ${this.point.guidingQuestion}<br/>Success Rate: <b>${this.point.y}%</b>`;
-            }
+            return `<b>${this.point.name}</b><br/>Category: ${this.point.category}<br/>Guiding Question: ${this.point.guidingQuestion}<br/>Success Rate: <b>${this.point.y}%</b>`;
           }
         },
         plotOptions: { 
@@ -856,9 +930,7 @@
             point: {
               events: {
                 click: function() {
-                  if (this.series.type !== 'line') {
-                    showIndicatorModal(this.name, this.category);
-                  }
+                  showIndicatorModal(this.name, this.category);
                 }
               }
             }
@@ -868,18 +940,6 @@
           {
             name: 'Success Rate',
             data: indicatorData
-          },
-          {
-            name: 'District Average',
-            type: 'line',
-            data: averageData,
-            color: '#dc3545',
-            lineWidth: 3,
-            marker: {
-              enabled: true,
-              radius: 4
-            },
-            visible: false
           }
         ],
         exporting: { 
@@ -962,20 +1022,9 @@
         'Support': []
       };
       
-      // Collect all schools and calculate category performance
-      Object.entries(chartData).forEach(([gqName, gqData]) => {
-        const category = gqData.category;
-        if (category && categoryData[category]) {
-          Object.entries(gqData).forEach(([indicator, schoolData]) => {
-            if (indicator !== 'category' && typeof schoolData === 'object') {
-              Object.keys(schoolData).forEach(school => schools.add(school));
-            }
-          });
-        }
-      });
-      
-      // Calculate success rate for each category per school
-      const schoolList = Array.from(schools).sort();
+      // Get filtered schools
+      const filteredSchools = getFilteredSchools();
+      const schoolList = filteredSchools.sort();
       schoolList.forEach(school => {
         Object.keys(categoryData).forEach(category => {
           let totalResponses = 0;
@@ -1010,8 +1059,7 @@
         color: getCategoryColor(category)
       }));
       
-      // Add district average line
-      const districtAverageData = schoolList.map(school => districtAverage);
+
       
       charts.categoryBySchool = Highcharts.chart('categoryBySchoolChart', {
         chart: { type: 'column' },
@@ -1038,18 +1086,7 @@
             pointPadding: 0.05
           }
         },
-        series: [
-          ...series,
-          {
-            name: 'District Average',
-            type: 'line',
-            data: districtAverageData,
-            visible: false,
-            color: '#6c757d',
-            lineWidth: 2,
-            marker: { enabled: true }
-          }
-        ],
+        series: series,
         exporting: { 
           enabled: true,
           buttons: {
@@ -1087,28 +1124,7 @@
       }
     }
     
-    function toggleAverage(chartId) {
-      const button = document.getElementById(`toggleAverage${chartId}`);
-      let chart;
-      
-      if (chartId === 1) {
-        chart = charts.guidingQuestionGrouped;
-      } else if (chartId === 2) {
-        chart = charts.indicator;
-      } else if (chartId === 4) {
-        chart = charts.categoryBySchool;
-      }
-      
-      if (chart) {
-        const averageSeries = chart.series.find(s => s.name === 'District Average');
-        if (averageSeries) {
-          const isVisible = averageSeries.visible;
-          averageSeries.setVisible(!isVisible);
-          button.classList.toggle('active', !isVisible);
-          button.textContent = !isVisible ? 'Hide District Average' : 'Show District Average';
-        }
-      }
-    }
+
     
     // Modal functions
     function showSchoolModal(schoolName) {
