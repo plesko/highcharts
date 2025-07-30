@@ -586,7 +586,7 @@
           schoolTypeMapping[school] = 'elementary';
         } else if (schoolLower.includes('middle') || schoolLower.includes('junior')) {
           schoolTypeMapping[school] = 'middle';
-        } else if (schoolLower.includes('high') || schoolLower.includes('secondary') || schoolLower.includes('senior')) {
+        } else if (schoolLower.includes('high') || schoolLower.includes('secondary') || schoolLower.includes('senior') || schoolLower.includes('other')) {
           schoolTypeMapping[school] = 'high';
         } else {
           // Default to elementary if unclear
